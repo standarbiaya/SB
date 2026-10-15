@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "portal-standar-biaya",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-13",
+  "assets": { "not_found_handling": "single-page-application", "run_worker_first": ["/api/*"] },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "portal-standar-biaya-db", "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_UUID" }
+  ],
+  "vars": { "GOOGLE_SHEET_ID": "", "ENABLE_SCHEDULED_SYNC": "false" },
+  "triggers": { "crons": ["0 1 * * *"] },
+  "observability": { "enabled": true }
+}
