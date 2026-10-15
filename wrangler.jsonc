@@ -5,7 +5,7 @@
   "compatibility_date": "2026-10-13",
   "assets": { "not_found_handling": "single-page-application", "run_worker_first": ["/api/*"] },
   "d1_databases": [
-    { "binding": "DB", "database_name": "portal-standar-biaya-db", "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_UUID" }
+    { "binding": "DB", "database_name": "portal-standar-biaya-db", "database_id": "65cc22e8-d564-42c6-9e1e-45f7ffeb3bd0" }
   ],
   "vars": { "GOOGLE_SHEET_ID": "", "ENABLE_SCHEDULED_SYNC": "false" },
   "triggers": { "crons": ["0 1 * * *"] },
