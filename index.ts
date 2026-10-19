@@ -9,11 +9,8 @@ type Env = {
   SYNC_ADMIN_TOKEN?: string;
   ENABLE_SCHEDULED_SYNC?: string;
   ASSETS: Fetcher;
-
   PORTAL_LOGIN_PASSWORD: string;
   PORTAL_SESSION_SECRET: string;
-};
-
 type Row = Record<string, string>;
 
 const REQUIRED:Record<string,string[]>={
