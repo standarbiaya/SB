@@ -1,18 +1,17 @@
-
-/** Cloudflare Workers API */
-
+/** Cloudflare Workers API: PUBLIC READS, PRIVILEGED GOOGLE SYNC. */
 type Env = {
   DB: D1Database;
+  ASSETS: Fetcher;
   GOOGLE_SHEET_ID: string;
   GOOGLE_SERVICE_ACCOUNT_EMAIL?: string;
   GOOGLE_PRIVATE_KEY?: string;
   SYNC_ADMIN_TOKEN?: string;
   ENABLE_SCHEDULED_SYNC?: string;
-  ASSETS: Fetcher;
   PORTAL_LOGIN_PASSWORD: string;
   PORTAL_SESSION_SECRET: string;
-type Row = Record<string, string>;
+};
 
+type Row=Record<string,string>;
 const REQUIRED:Record<string,string[]>={
   MASTER_ITEM:['id','jenis','kelompok','subkelompok','nama','definisi','satuan','status'],
   BESARAN_BIAYA:['id','item_id','tahun','wilayah','kategori','besaran','mata_uang','ketentuan'],
@@ -95,66 +94,3 @@ async function sync(env:Env){
   // Each D1 batch is transactional. Until the FINAL publication pointer is updated,
   // unfinished versions remain invisible to all public read endpoints.
   for(let offset=0;offset<statements.length;offset+=50)await env.DB.batch(statements.slice(offset,offset+50));
-  await env.DB.batch([
-    env.DB.prepare('INSERT INTO publications(version,published_at,source_sheet_id,item_count,regulation_count,document_count) VALUES(?,?,?,?,?,?)').bind(version,now,env.GOOGLE_SHEET_ID,data.MASTER_ITEM.length,data.REGULASI.length,data.DOKUMEN.filter(x=>x.status_publikasi==='approved_public').length),
-    env.DB.prepare("INSERT INTO settings(key,value) VALUES('published_version',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").bind(version),
-    env.DB.prepare('INSERT INTO sync_logs(id,started_at,completed_at,status,message,publication_version) VALUES(?,?,?,?,?,?)').bind(crypto.randomUUID(),now,new Date().toISOString(),'success','Synced and published',version)
-  ]);
-  return {version,counts:{items:data.MASTER_ITEM.length,rates:data.BESARAN_BIAYA.length,regulations:data.REGULASI.length,documents:data.DOKUMEN.filter(x=>x.status_publikasi==='approved_public').length},publishedAt:now};
-}
-async function handle(request:Request,env:Env):Promise<Response>{
-  const u=new URL(request.url),path=u.pathname;
-  if(path==='/api/health')return json({status:'ok',service:'portal-standar-biaya',timestamp:new Date().toISOString()});
-  if(path==='/api/admin/sync'){
-    if(request.method!=='POST')return bad('Method not allowed',405);
-    if(!env.SYNC_ADMIN_TOKEN||env.SYNC_ADMIN_TOKEN.length<24)return bad('Sinkronisasi belum dikonfigurasi',503);
-    const auth=request.headers.get('authorization')||'';
-    if(!auth.startsWith('Bearer ')||!secureEq(auth.slice(7),env.SYNC_ADMIN_TOKEN))return bad('Unauthorized',401);
-    try{return json({success:true,...await sync(env)},200,{'cache-control':'no-store'})}catch(e){console.error('Sync failed',String(e));return bad(`Sinkronisasi gagal. Versi publikasi sebelumnya dipertahankan. ${String(e)}`,422)}
-  }
-  if(request.method!=='GET')return bad('Method not allowed',405);
-  const v=await currentVersion(env.DB);
-  if(!v){
-    const emptySummary={itemCount:0,regulationCount:0,documentCount:0,sbmCount:0,sbkCount:0,ssbCount:0,byType:[],byYear:[],updatedAt:null};
-    if(path==='/api/summary')return json({data:emptySummary});
-    if(['/api/items','/api/regulations','/api/documents','/api/faq'].includes(path))return json({data:[],total:0});
-    return bad('Tidak ditemukan',404);
-  }
-  const limit=int(u.searchParams.get('limit')||undefined,30,1,500);
-  const offset=int(u.searchParams.get('offset')||undefined,0,0,100000);
-  if(path==='/api/summary'){
-    const [pub,types,years]=await Promise.all([
-      env.DB.prepare('SELECT * FROM publications WHERE version=?').bind(v).first<{published_at:string;item_count:number;regulation_count:number;document_count:number}>(),
-      env.DB.prepare('SELECT jenis as name, COUNT(*) as value FROM items WHERE version=? GROUP BY jenis').bind(v).all<{name:string;value:number}>(),
-      env.DB.prepare('SELECT CAST(tahun AS TEXT) as year, COUNT(*) as count FROM regulations WHERE version=? GROUP BY tahun ORDER BY tahun').bind(v).all<{year:string;count:number}>()
-    ]);
-    const byType=types.results||[];
-    return json({data:{itemCount:pub?.item_count||0,regulationCount:pub?.regulation_count||0,documentCount:pub?.document_count||0,sbmCount:byType.find(x=>x.name==='SBM')?.value||0,sbkCount:byType.find(x=>x.name==='SBK')?.value||0,ssbCount:byType.find(x=>x.name==='SSB')?.value||0,byType,byYear:years.results||[],updatedAt:pub?.published_at||null}});
-  }
-  if(path==='/api/items'){
-    const jenis=u.searchParams.get('jenis')||'',q=(u.searchParams.get('q')||'').slice(0,100);
-    const filter="version=? AND (?='' OR jenis=?) AND (?='' OR nama LIKE ? OR kelompok LIKE ?)";
-    const binds=[v,jenis,jenis,q,`%${q}%`,`%${q}%`];
-    const [rows,total]=await Promise.all([
-      env.DB.prepare(`SELECT * FROM items WHERE ${filter} ORDER BY nama LIMIT ? OFFSET ?`).bind(...binds,limit,offset).all(),
-      env.DB.prepare(`SELECT count(*) AS c FROM items WHERE ${filter}`).bind(...binds).first<{c:number}>()
-    ]);return json({data:rows.results,total:total?.c||0});
-  }
-  const match=path.match(/^\/api\/items\/([^/]+)$/);
-  if(match){const id=decodeURIComponent(match[1]);if(!isId(id))return bad('Invalid item ID');const [item,rates,regs]=await Promise.all([
-    env.DB.prepare('SELECT * FROM items WHERE version=? AND id=?').bind(v,id).first(),
-    env.DB.prepare('SELECT * FROM rates WHERE version=? AND item_id=? ORDER BY tahun DESC,wilayah').bind(v,id).all(),
-    env.DB.prepare('SELECT r.*, ir.pasal,ir.lampiran,ir.halaman,ir.keterangan FROM item_regulations ir JOIN regulations r ON r.id=ir.regulation_id AND r.version=ir.version WHERE ir.version=? AND ir.item_id=? ORDER BY r.tahun DESC').bind(v,id).all()
-  ]);if(!item)return bad('Item not found',404);return json({data:{item,rates:rates.results,regulations:regs.results}});}
-  if(path==='/api/regulations'){const result=await env.DB.prepare('SELECT * FROM regulations WHERE version=? ORDER BY tahun DESC,nomor LIMIT ? OFFSET ?').bind(v,limit,offset).all();return json({data:result.results});}
-  if(path==='/api/documents'){const result=await env.DB.prepare("SELECT * FROM documents WHERE version=? AND status_publikasi='approved_public' ORDER BY tahun DESC,judul LIMIT ? OFFSET ?").bind(v,limit,offset).all();return json({data:result.results});}
-  if(path==='/api/faq'){const result=await env.DB.prepare("SELECT * FROM faqs WHERE version=? AND status='published' ORDER BY id LIMIT ? OFFSET ?").bind(v,limit,offset).all();return json({data:result.results});}
-  return bad('API route not found',404);
-}
-export default {
-  async fetch(request:Request,env:Env){try{return await handle(request,env)}catch(e){console.error('API error',e);return bad('Terjadi gangguan layanan. Coba beberapa saat lagi.',500)}},
-  async scheduled(_event:ScheduledController,env:Env,ctx:ExecutionContext){
-    if(env.ENABLE_SCHEDULED_SYNC!=='true')return;
-    ctx.waitUntil(sync(env).then(result=>console.log('Scheduled sync success',result.version)).catch(e=>console.error('Scheduled sync failed; old dataset preserved',String(e))));
-  }
-} satisfies ExportedHandler<Env>;
