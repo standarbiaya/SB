@@ -31,10 +31,11 @@ function b64url(buffer: ArrayBuffer): string {
   return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
 }
 async function signature(secret: string, payload: string): Promise<string> {
+  // Use the Web Crypto API with the correct algorithm objects so TypeScript accepts it.
   const key = await crypto.subtle.importKey(
-    'raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+    'raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: { name: 'SHA-256' } }, false, ['sign']
   );
-  const output = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+  const output = await crypto.subtle.sign({ name: 'HMAC' }, key, new TextEncoder().encode(payload));
   return b64url(output);
 }
 function getCookie(request: Request): string | null {
