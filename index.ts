@@ -1,17 +1,20 @@
-/** Cloudflare Workers API: PUBLIC READS, PRIVILEGED GOOGLE SYNC. */
+
+/** Cloudflare Workers API */
+
 type Env = {
   DB: D1Database;
-  ASSETS: Fetcher;
   GOOGLE_SHEET_ID: string;
   GOOGLE_SERVICE_ACCOUNT_EMAIL?: string;
   GOOGLE_PRIVATE_KEY?: string;
   SYNC_ADMIN_TOKEN?: string;
   ENABLE_SCHEDULED_SYNC?: string;
+  ASSETS: Fetcher;
   PORTAL_LOGIN_PASSWORD: string;
   PORTAL_SESSION_SECRET: string;
 };
 
-type Row=Record<string,string>;
+type Row = Record<string, string>;
+
 const REQUIRED:Record<string,string[]>={
   MASTER_ITEM:['id','jenis','kelompok','subkelompok','nama','definisi','satuan','status'],
   BESARAN_BIAYA:['id','item_id','tahun','wilayah','kategori','besaran','mata_uang','ketentuan'],
@@ -91,6 +94,3 @@ async function sync(env:Env){
   for(const r of data.RELASI_REGULASI)statements.push(env.DB.prepare('INSERT INTO item_regulations (version,item_id,regulation_id,pasal,lampiran,halaman,keterangan) VALUES (?,?,?,?,?,?,?)').bind(version,r.item_id,r.regulation_id,r.pasal,r.lampiran,r.halaman,r.keterangan));
   for(const r of data.DOKUMEN.filter(x=>x.status_publikasi==='approved_public'))statements.push(env.DB.prepare('INSERT INTO documents (version,id,judul,kategori,tahun,deskripsi,drive_file_id,status_publikasi) VALUES (?,?,?,?,?,?,?,?)').bind(version,r.id,r.judul,r.kategori,year(r.tahun,'documents'),r.deskripsi,r.drive_file_id,r.status_publikasi));
   for(const r of data.FAQ.filter(x=>x.status==='published'))statements.push(env.DB.prepare('INSERT INTO faqs (version,id,pertanyaan,jawaban,referensi,status) VALUES (?,?,?,?,?,?)').bind(version,r.id,r.pertanyaan,r.jawaban,r.referensi,r.status));
-  // Each D1 batch is transactional. Until the FINAL publication pointer is updated,
-  // unfinished versions remain invisible to all public read endpoints.
-  for(let offset=0;offset<statements.length;offset+=50)await env.DB.batch(statements.slice(offset,offset+50));
