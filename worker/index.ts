@@ -1,11 +1,19 @@
 /** Cloudflare Workers API: PUBLIC READS, PRIVILEGED GOOGLE SYNC. */
+
 type Env = {
-  DB:D1Database;
-  GOOGLE_SHEET_ID:string;
-  GOOGLE_SERVICE_ACCOUNT_EMAIL?:string;
-  GOOGLE_PRIVATE_KEY?:string;
-  SYNC_ADMIN_TOKEN?:string;
-  ENABLE_SCHEDULED_SYNC?:string;
+  DB: D1Database;
+  ASSETS: Fetcher;
+
+  GOOGLE_SHEET_ID: string;
+  GOOGLE_SERVICE_ACCOUNT_EMAIL?: string;
+  GOOGLE_PRIVATE_KEY?: string;
+  SYNC_ADMIN_TOKEN?: string;
+  ENABLE_SCHEDULED_SYNC?: string;
+
+  PORTAL_LOGIN_PASSWORD: string;
+  PORTAL_SESSION_SECRET: string;
+};
+
 };
 type Row=Record<string,string>;
 const REQUIRED:Record<string,string[]>={
@@ -147,10 +155,228 @@ async function handle(request:Request,env:Env):Promise<Response>{
   if(path==='/api/faq'){const result=await env.DB.prepare("SELECT * FROM faqs WHERE version=? AND status='published' ORDER BY id LIMIT ? OFFSET ?").bind(v,limit,offset).all();return json({data:result.results});}
   return bad('API route not found',404);
 }
+
+const LOGIN_COOKIE = 'portal_session';
+const SESSION_SECONDS = 8 * 60 * 60;
+
+function loginPage(error = false): Response {
+  const html = `<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Login - Portal Standar Biaya</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#102f50;font-family:Arial,sans-serif}
+.card{width:min(400px,92%);background:white;padding:36px;border-radius:14px;box-shadow:0 12px 35px #0003}
+h2{text-align:center;color:#12395d;margin-bottom:8px}
+p{text-align:center;color:#64748b;font-size:14px}
+label{display:block;margin:20px 0 7px;color:#12395d}
+input{width:100%;padding:13px;border:1px solid #cbd5e1;border-radius:7px;font-size:15px}
+button{width:100%;padding:14px;margin-top:25px;background:#d8b36b;border:0;border-radius:7px;font-weight:bold;cursor:pointer}
+.error{color:#b91c1c}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>PORTAL STANDAR BIAYA</h2>
+<p>Login Administrator</p>
+${error ? '<p class="error">Username atau password salah.</p>' : ''}
+<form method="POST" action="/login">
+<label>Username</label>
+<input name="username" autocomplete="username" required>
+<label>Password</label>
+<input type="password" name="password" autocomplete="current-password" required>
+<button type="submit">MASUK KE PORTAL</button>
+</form>
+</div>
+</body>
+</html>`;
+
+  return new Response(html, {
+    headers: {
+      'content-type': 'text/html; charset=utf-8',
+      'cache-control': 'no-store',
+      'x-content-type-options': 'nosniff',
+      'content-security-policy':
+        "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+      'referrer-policy': 'no-referrer'
+    }
+  });
+}
+
+function redirect(to: string, cookie?: string): Response {
+  const headers = new Headers({
+    location: to,
+    'cache-control': 'no-store'
+  });
+  if (cookie) headers.set('set-cookie', cookie);
+  return new Response(null, { status: 303, headers });
+}
+
+function sessionCookie(value: string, maxAge: number): string {
+  return `${LOGIN_COOKIE}=${value}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge}`;
+}
+
+function fromBase64Url(value: string): Uint8Array {
+  const normalized = value.replace(/-/g, '+').replace(/_/g, '/');
+  const binary = atob(normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '='));
+  return Uint8Array.from(binary, c => c.charCodeAt(0));
+}
+
+async function sessionKey(env: Env): Promise<CryptoKey> {
+  return crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(env.PORTAL_SESSION_SECRET),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign', 'verify']
+  );
+}
+
+async function createSession(env: Env): Promise<string> {
+  const expiry = String(Math.floor(Date.now() / 1000) + SESSION_SECONDS);
+  const signature = await crypto.subtle.sign(
+    'HMAC',
+    await sessionKey(env),
+    new TextEncoder().encode(expiry)
+  );
+  return `${expiry}.${b64url(new Uint8Array(signature))}`;
+}
+
+async function validSession(request: Request, env: Env): Promise<boolean> {
+  try {
+    const cookie = request.headers.get('cookie') || '';
+    const value = cookie.split(';').map(x => x.trim())
+      .find(x => x.startsWith(LOGIN_COOKIE + '='))
+      ?.slice(LOGIN_COOKIE.length + 1);
+
+    if (!value) return false;
+
+    const parts = value.split('.');
+    if (parts.length !== 2) return false;
+
+    const [expiry, signature] = parts;
+    if (!/^\d{10,11}$/.test(expiry)) return false;
+    if (Number(expiry) <= Math.floor(Date.now() / 1000)) return false;
+    if (Number(expiry) > Math.floor(Date.now() / 1000) + SESSION_SECONDS) return false;
+
+    return await crypto.subtle.verify(
+      'HMAC',
+      await sessionKey(env),
+      fromBase64Url(signature),
+      new TextEncoder().encode(expiry)
+    );
+  } catch {
+    return false;
+  }
+}
+
+function sameOrigin(request: Request): boolean {
+  return request.headers.get('origin') === new URL(request.url).origin;
+}
+
+async function portalFetch(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const path = url.pathname;
+
+  if (!env.PORTAL_LOGIN_PASSWORD || !env.PORTAL_SESSION_SECRET || !env.ASSETS) {
+    return bad('Konfigurasi login belum lengkap', 503);
+  }
+
+  // Endpoint sinkronisasi tetap memakai token admin yang sudah ada.
+  if (path === '/api/admin/sync') {
+    return handle(request, env);
+  }
+
+  if (path === '/login' && request.method === 'GET') {
+    if (await validSession(request, env)) return redirect('/');
+    return loginPage(url.searchParams.has('error'));
+  }
+
+  if (path === '/login' && request.method === 'POST') {
+    if (!sameOrigin(request)) return bad('Permintaan ditolak', 403);
+
+    const contentType = request.headers.get('content-type') || '';
+    if (!contentType.startsWith('application/x-www-form-urlencoded')) {
+      return bad('Format login tidak valid', 415);
+    }
+
+    const body = await request.text();
+    if (body.length > 4096) return bad('Permintaan terlalu besar', 413);
+
+    const form = new URLSearchParams(body);
+    const username = form.get('username') || '';
+    const password = form.get('password') || '';
+
+    const usernameValid = secureEq(username, 'admin');
+    const passwordValid = secureEq(password, env.PORTAL_LOGIN_PASSWORD);
+
+    if (!usernameValid || !passwordValid) {
+      return redirect('/login?error=1');
+    }
+
+    const session = await createSession(env);
+    return redirect('/', sessionCookie(session, SESSION_SECONDS));
+  }
+
+  if (path === '/logout' && request.method === 'POST') {
+    if (!sameOrigin(request)) return bad('Permintaan ditolak', 403);
+    return redirect('/login', sessionCookie('', 0));
+  }
+
+  if (!(await validSession(request, env))) {
+    if (path.startsWith('/api/')) return bad('Unauthorized', 401);
+    return redirect('/login');
+  }
+
+  if (path.startsWith('/api/')) {
+    return handle(request, env);
+  }
+
+  const response = await env.ASSETS.fetch(request);
+  const headers = new Headers(response.headers);
+  headers.set('cache-control', 'private, no-store');
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
+}
+
 export default {
-  async fetch(request:Request,env:Env){try{return await handle(request,env)}catch(e){console.error('API error',e);return bad('Terjadi gangguan layanan. Coba beberapa saat lagi.',500)}},
-  async scheduled(_event:ScheduledController,env:Env,ctx:ExecutionContext){
-    if(env.ENABLE_SCHEDULED_SYNC!=='true')return;
-    ctx.waitUntil(sync(env).then(result=>console.log('Scheduled sync success',result.version)).catch(e=>console.error('Scheduled sync failed; old dataset preserved',String(e))));
+  async fetch(request: Request, env: Env) {
+    try {
+      return await portalFetch(request, env);
+    } catch (e) {
+      console.error('Portal error', e);
+      return bad(
+        'Terjadi gangguan layanan. Coba beberapa saat lagi.',
+        500
+      );
+    }
+  },
+
+  async scheduled(
+    _event: ScheduledController,
+    env: Env,
+    ctx: ExecutionContext
+  ) {
+    if (env.ENABLE_SCHEDULED_SYNC !== 'true') return;
+
+    ctx.waitUntil(
+      sync(env)
+        .then(result =>
+          console.log('Scheduled sync success', result.version)
+        )
+        .catch(e =>
+          console.error(
+            'Scheduled sync failed; old dataset preserved',
+            String(e)
+          )
+        )
+    );
   }
 } satisfies ExportedHandler<Env>;
