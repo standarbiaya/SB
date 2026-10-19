@@ -3,7 +3,11 @@
   "name": "portal-standar-biaya",
   "main": "worker/index.ts",
   "compatibility_date": "2026-10-13",
-  "assets": { "not_found_handling": "single-page-application", "run_worker_first": ["/api/*"] },
+  "assets": "assets": {
+  "not_found_handling": "single-page-application",
+  "binding": "ASSETS",
+  "run_worker_first": true
+},
   "d1_databases": [
     { "binding": "DB", "database_name": "portal-standar-biaya-db", "database_id": "65cc22e8-d564-42c6-9e1e-45f7ffeb3bd0" }
   ],
