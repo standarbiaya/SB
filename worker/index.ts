@@ -1,382 +1,117 @@
-/** Cloudflare Workers API: PUBLIC READS, PRIVILEGED GOOGLE SYNC. */
-
-type Env = {
-  DB: D1Database;
-  ASSETS: Fetcher;
-
-  GOOGLE_SHEET_ID: string;
-  GOOGLE_SERVICE_ACCOUNT_EMAIL?: string;
-  GOOGLE_PRIVATE_KEY?: string;
-  SYNC_ADMIN_TOKEN?: string;
-  ENABLE_SCHEDULED_SYNC?: string;
-
-  PORTAL_LOGIN_PASSWORD: string;
-  PORTAL_SESSION_SECRET: string;
+/** Secure, stateless portal login for Cloudflare Workers.
+ * Secrets are configured in Cloudflare, never in the repository or Vite env.
+ */
+export type PortalAuthEnv = {
+  PORTAL_LOGIN_PASSWORD?: string;
+  PORTAL_SESSION_SECRET?: string;
 };
 
-};
-type Row=Record<string,string>;
-const REQUIRED:Record<string,string[]>={
-  MASTER_ITEM:['id','jenis','kelompok','subkelompok','nama','definisi','satuan','status'],
-  BESARAN_BIAYA:['id','item_id','tahun','wilayah','kategori','besaran','mata_uang','ketentuan'],
-  REGULASI:['id','jenis','nomor','tahun','judul','tanggal_berlaku','status','url','status_publikasi'],
-  RELASI_REGULASI:['item_id','regulation_id','pasal','lampiran','halaman','keterangan'],
-  DOKUMEN:['id','judul','kategori','tahun','deskripsi','drive_file_id','status_publikasi'],
-  FAQ:['id','pertanyaan','jawaban','referensi','status']
-};
-const HEADERS={'content-type':'application/json; charset=utf-8','cache-control':'public, max-age=60, stale-while-revalidate=120','x-content-type-options':'nosniff'};
-function json(data:unknown,status=200,headers:Record<string,string>={}){return new Response(JSON.stringify(data),{status,headers:{...HEADERS,...headers}})}
-function bad(message:string,status=400){return json({error:message},status,{'cache-control':'no-store'});}
-function int(value:string|undefined,defaultValue:number,min:number,max:number){const n=Number(value);return Number.isInteger(n)&&n>=min&&n<=max?n:defaultValue}
-function isId(s:string){return /^[\w.:-]{1,120}$/.test(s)}
-function secureEq(a:string,b:string){const encoder=new TextEncoder();const aa=encoder.encode(a),bb=encoder.encode(b);let diff=aa.length^bb.length;for(let i=0;i<Math.max(aa.length,bb.length);i++)diff|=(aa[i]||0)^(bb[i]||0);return diff===0}
-async function currentVersion(db:D1Database){const row=await db.prepare("SELECT value FROM settings WHERE key='published_version'").first<{value:string}>();return row?.value??null;}
-function b64url(input:Uint8Array|string){const bytes=typeof input==='string'?new TextEncoder().encode(input):input;let s='';for(const x of bytes)s+=String.fromCharCode(x);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
-async function googleToken(env:Env):Promise<string>{
-  if(!env.GOOGLE_SERVICE_ACCOUNT_EMAIL||!env.GOOGLE_PRIVATE_KEY)throw new Error('Google service account secrets belum disetel');
-  const header=b64url(JSON.stringify({alg:'RS256',typ:'JWT'}));
-  const now=Math.floor(Date.now()/1000);
-  const claim=b64url(JSON.stringify({iss:env.GOOGLE_SERVICE_ACCOUNT_EMAIL,scope:'https://www.googleapis.com/auth/spreadsheets.readonly https://www.googleapis.com/auth/drive.metadata.readonly',aud:'https://oauth2.googleapis.com/token',iat:now,exp:now+3300}));
-  const payload=`${header}.${claim}`;
-  const pem=env.GOOGLE_PRIVATE_KEY.replace(/\\n/g,'\n').replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\s/g,'');
-  const binary=atob(pem);const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
-  const key=await crypto.subtle.importKey('pkcs8',bytes.buffer,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']);
-  const signature=new Uint8Array(await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,new TextEncoder().encode(payload)));
-  const response=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'urn:ietf:params:oauth:grant-type:jwt-bearer',assertion:`${payload}.${b64url(signature)}`})});
-  if(!response.ok)throw new Error(`Google OAuth gagal (${response.status})`);
-  const token=await response.json() as {access_token?:string};if(!token.access_token)throw new Error('Google OAuth tidak memberikan token');return token.access_token;
-}
-async function readSheet(env:Env,token:string,name:string){
-  // Template limit of 1,999 data rows; increase with batching for larger production datasets.
-  const url=`https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(env.GOOGLE_SHEET_ID)}/values/${encodeURIComponent(name+'!A1:U2000')}?valueRenderOption=UNFORMATTED_VALUE`;
-  const response=await fetch(url,{headers:{authorization:`Bearer ${token}`}});
-  if(!response.ok)throw new Error(`Tidak bisa membaca tab ${name} (${response.status})`);
-  const data=await response.json() as {values?:(string|number|boolean)[][]};const rows=data.values||[];
-  if(!rows.length)throw new Error(`Tab ${name} kosong atau tidak memiliki header`);
-  const header=rows[0].map(x=>String(x).trim().toLowerCase());
-  const missing=REQUIRED[name].filter(k=>!header.includes(k));if(missing.length)throw new Error(`${name}: kolom wajib tidak ada: ${missing.join(', ')}`);
-  const records:Row[]=rows.slice(1).filter(r=>r.some(v=>String(v??'').trim()!=='')).map(r=>Object.fromEntries(header.map((h,i)=>[h,String(r[i]??'').trim()])));
-  if(rows.length>=2000)throw new Error(`${name} mencapai batas 1.999 baris. Implementasikan pagination sebelum melanjutkan.`);
-  return records;
-}
-function requiredString(row:Row,name:string,label:string){const s=row[name]?.trim()||'';if(!s&&name!=='definisi'&&name!=='subkelompok'&&name!=='ketentuan'&&name!=='tanggal_berlaku'&&name!=='deskripsi'&&name!=='pasal'&&name!=='lampiran'&&name!=='halaman'&&name!=='keterangan'&&name!=='referensi'&&name!=='jawaban'&&name!=='drive_file_id'&&name!=='url')throw new Error(`${label}: ${name} wajib diisi`);if(s.length>1500)throw new Error(`${label}: ${name} terlalu panjang`);return s;}
-function year(s:string,label:string){const y=Number(s);if(!Number.isInteger(y)||y<2000||y>2100)throw new Error(`${label}: tahun tidak valid`);return y;}
-function rupiah(s:string,label:string){const v=Number(s);if(!Number.isFinite(v)||v<0||v>1e15)throw new Error(`${label}: besaran harus angka non-negatif (tanpa separator ribuan)`);return v;}
-function ensureUnique(rows:Row[],label:string,key='id'){const seen=new Set<string>();for(const r of rows){const id=requiredString(r,key,label);if(!isId(id))throw new Error(`${label}: ID tidak valid: ${id}`);if(seen.has(id))throw new Error(`${label}: ID duplikat: ${id}`);seen.add(id)}return seen;}
-function validate(data:Record<string,Row[]>) {
-  for(const [name,rows] of Object.entries(data))for(const r of rows)for(const k of REQUIRED[name])requiredString(r,k,name);
-  const ids=ensureUnique(data.MASTER_ITEM,'MASTER_ITEM');
-  const regIds=ensureUnique(data.REGULASI,'REGULASI');
-  ensureUnique(data.BESARAN_BIAYA,'BESARAN_BIAYA');ensureUnique(data.DOKUMEN,'DOKUMEN');ensureUnique(data.FAQ,'FAQ');
-  for(const item of data.MASTER_ITEM){if(!['SBM','SBK','SSB'].includes(item.jenis))throw new Error(`Jenis tidak dikenal: ${item.jenis}`);if(item.status!=='published')throw new Error(`MASTER_ITEM: entri ${item.id} belum berstatus published. Pisahkan draft dari sumber publikasi.`);}
-  for(const r of data.BESARAN_BIAYA){if(!ids.has(r.item_id))throw new Error(`BESARAN_BIAYA: item_id tak ditemukan: ${r.item_id}`);year(r.tahun,'BESARAN_BIAYA');rupiah(r.besaran,'BESARAN_BIAYA');if(!['IDR','PCT'].includes(r.mata_uang))throw new Error('Satuan besaran hanya mendukung IDR (Rupiah) atau PCT (Persentase)');}
-  for(const r of data.REGULASI){if(r.status_publikasi!=='approved_public')throw new Error(`REGULASI: ${r.id} belum disetujui untuk publikasi`);year(r.tahun,'REGULASI');if(r.url&&!/^https:\/\//.test(r.url))throw new Error('REGULASI: URL wajib HTTPS');}
-  const seenRel=new Set<string>();for(const r of data.RELASI_REGULASI){if(!ids.has(r.item_id)||!regIds.has(r.regulation_id))throw new Error('RELASI_REGULASI mengacu ke ID yang tidak ada');const key=[r.item_id,r.regulation_id,r.pasal,r.lampiran].join('|');if(seenRel.has(key))throw new Error('RELASI_REGULASI duplikat');seenRel.add(key)}
-  for(const r of data.DOKUMEN){year(r.tahun,'DOKUMEN');if(!['approved_public','draft','internal'].includes(r.status_publikasi))throw new Error('DOKUMEN status_publikasi tidak valid');if(r.status_publikasi==='approved_public'&&r.drive_file_id&&!/^[\w-]{10,150}$/.test(r.drive_file_id))throw new Error('DOKUMEN: Drive File ID salah format');}
-  for(const r of data.FAQ){if(!['published','draft'].includes(r.status))throw new Error('FAQ status tidak valid');}
-}
-async function verifyDriveFiles(token:string,docs:Row[]){
-  // Checks existence/metadata only; public sharing permission must be checked by operator.
-  for(const doc of docs.filter(x=>x.status_publikasi==='approved_public'&&x.drive_file_id)){
-    const response=await fetch(`https://www.googleapis.com/drive/v3/files/${encodeURIComponent(doc.drive_file_id)}?fields=id%2Cname%2CmimeType%2Ctrashed`,{headers:{authorization:`Bearer ${token}`}});
-    if(!response.ok)throw new Error(`Google Drive file ${doc.id} tidak bisa diakses (${response.status})`);
-    const file=await response.json() as {trashed?:boolean};if(file.trashed)throw new Error(`File ${doc.id} berada di sampah Google Drive`);
-  }
-}
-async function sync(env:Env){
-  if(!env.GOOGLE_SHEET_ID)throw new Error('GOOGLE_SHEET_ID belum dikonfigurasi');
-  const token=await googleToken(env);const data:Record<string,Row[]>={};
-  for(const name of Object.keys(REQUIRED))data[name]=await readSheet(env,token,name);
-  validate(data);await verifyDriveFiles(token,data.DOKUMEN);
-  const version=crypto.randomUUID(),now=new Date().toISOString();
-  const statements:D1PreparedStatement[]=[];
-  for(const r of data.MASTER_ITEM)statements.push(env.DB.prepare('INSERT INTO items (version,id,jenis,kelompok,subkelompok,nama,definisi,satuan,status) VALUES (?,?,?,?,?,?,?,?,?)').bind(version,r.id,r.jenis,r.kelompok,r.subkelompok,r.nama,r.definisi,r.satuan,r.status));
-  for(const r of data.BESARAN_BIAYA)statements.push(env.DB.prepare('INSERT INTO rates (version,id,item_id,tahun,wilayah,kategori,besaran,mata_uang,ketentuan) VALUES (?,?,?,?,?,?,?,?,?)').bind(version,r.id,r.item_id,year(r.tahun,'rates'),r.wilayah,r.kategori,rupiah(r.besaran,'rates'),r.mata_uang,r.ketentuan));
-  for(const r of data.REGULASI)statements.push(env.DB.prepare('INSERT INTO regulations (version,id,jenis,nomor,tahun,judul,tanggal_berlaku,status,url) VALUES (?,?,?,?,?,?,?,?,?)').bind(version,r.id,r.jenis,r.nomor,year(r.tahun,'regulations'),r.judul,r.tanggal_berlaku,r.status,r.url));
-  for(const r of data.RELASI_REGULASI)statements.push(env.DB.prepare('INSERT INTO item_regulations (version,item_id,regulation_id,pasal,lampiran,halaman,keterangan) VALUES (?,?,?,?,?,?,?)').bind(version,r.item_id,r.regulation_id,r.pasal,r.lampiran,r.halaman,r.keterangan));
-  for(const r of data.DOKUMEN.filter(x=>x.status_publikasi==='approved_public'))statements.push(env.DB.prepare('INSERT INTO documents (version,id,judul,kategori,tahun,deskripsi,drive_file_id,status_publikasi) VALUES (?,?,?,?,?,?,?,?)').bind(version,r.id,r.judul,r.kategori,year(r.tahun,'documents'),r.deskripsi,r.drive_file_id,r.status_publikasi));
-  for(const r of data.FAQ.filter(x=>x.status==='published'))statements.push(env.DB.prepare('INSERT INTO faqs (version,id,pertanyaan,jawaban,referensi,status) VALUES (?,?,?,?,?,?)').bind(version,r.id,r.pertanyaan,r.jawaban,r.referensi,r.status));
-  // Each D1 batch is transactional. Until the FINAL publication pointer is updated,
-  // unfinished versions remain invisible to all public read endpoints.
-  for(let offset=0;offset<statements.length;offset+=50)await env.DB.batch(statements.slice(offset,offset+50));
-  await env.DB.batch([
-    env.DB.prepare('INSERT INTO publications(version,published_at,source_sheet_id,item_count,regulation_count,document_count) VALUES(?,?,?,?,?,?)').bind(version,now,env.GOOGLE_SHEET_ID,data.MASTER_ITEM.length,data.REGULASI.length,data.DOKUMEN.filter(x=>x.status_publikasi==='approved_public').length),
-    env.DB.prepare("INSERT INTO settings(key,value) VALUES('published_version',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").bind(version),
-    env.DB.prepare('INSERT INTO sync_logs(id,started_at,completed_at,status,message,publication_version) VALUES(?,?,?,?,?,?)').bind(crypto.randomUUID(),now,new Date().toISOString(),'success','Synced and published',version)
-  ]);
-  return {version,counts:{items:data.MASTER_ITEM.length,rates:data.BESARAN_BIAYA.length,regulations:data.REGULASI.length,documents:data.DOKUMEN.filter(x=>x.status_publikasi==='approved_public').length},publishedAt:now};
-}
-async function handle(request:Request,env:Env):Promise<Response>{
-  const u=new URL(request.url),path=u.pathname;
-  if(path==='/api/health')return json({status:'ok',service:'portal-standar-biaya',timestamp:new Date().toISOString()});
-  if(path==='/api/admin/sync'){
-    if(request.method!=='POST')return bad('Method not allowed',405);
-    if(!env.SYNC_ADMIN_TOKEN||env.SYNC_ADMIN_TOKEN.length<24)return bad('Sinkronisasi belum dikonfigurasi',503);
-    const auth=request.headers.get('authorization')||'';
-    if(!auth.startsWith('Bearer ')||!secureEq(auth.slice(7),env.SYNC_ADMIN_TOKEN))return bad('Unauthorized',401);
-    try{return json({success:true,...await sync(env)},200,{'cache-control':'no-store'})}catch(e){console.error('Sync failed',String(e));return bad(`Sinkronisasi gagal. Versi publikasi sebelumnya dipertahankan. ${String(e)}`,422)}
-  }
-  if(request.method!=='GET')return bad('Method not allowed',405);
-  const v=await currentVersion(env.DB);
-  if(!v){
-    const emptySummary={itemCount:0,regulationCount:0,documentCount:0,sbmCount:0,sbkCount:0,ssbCount:0,byType:[],byYear:[],updatedAt:null};
-    if(path==='/api/summary')return json({data:emptySummary});
-    if(['/api/items','/api/regulations','/api/documents','/api/faq'].includes(path))return json({data:[],total:0});
-    return bad('Tidak ditemukan',404);
-  }
-  const limit=int(u.searchParams.get('limit')||undefined,30,1,500);
-  const offset=int(u.searchParams.get('offset')||undefined,0,0,100000);
-  if(path==='/api/summary'){
-    const [pub,types,years]=await Promise.all([
-      env.DB.prepare('SELECT * FROM publications WHERE version=?').bind(v).first<{published_at:string;item_count:number;regulation_count:number;document_count:number}>(),
-      env.DB.prepare('SELECT jenis as name, COUNT(*) as value FROM items WHERE version=? GROUP BY jenis').bind(v).all<{name:string;value:number}>(),
-      env.DB.prepare('SELECT CAST(tahun AS TEXT) as year, COUNT(*) as count FROM regulations WHERE version=? GROUP BY tahun ORDER BY tahun').bind(v).all<{year:string;count:number}>()
-    ]);
-    const byType=types.results||[];
-    return json({data:{itemCount:pub?.item_count||0,regulationCount:pub?.regulation_count||0,documentCount:pub?.document_count||0,sbmCount:byType.find(x=>x.name==='SBM')?.value||0,sbkCount:byType.find(x=>x.name==='SBK')?.value||0,ssbCount:byType.find(x=>x.name==='SSB')?.value||0,byType,byYear:years.results||[],updatedAt:pub?.published_at||null}});
-  }
-  if(path==='/api/items'){
-    const jenis=u.searchParams.get('jenis')||'',q=(u.searchParams.get('q')||'').slice(0,100);
-    const filter="version=? AND (?='' OR jenis=?) AND (?='' OR nama LIKE ? OR kelompok LIKE ?)";
-    const binds=[v,jenis,jenis,q,`%${q}%`,`%${q}%`];
-    const [rows,total]=await Promise.all([
-      env.DB.prepare(`SELECT * FROM items WHERE ${filter} ORDER BY nama LIMIT ? OFFSET ?`).bind(...binds,limit,offset).all(),
-      env.DB.prepare(`SELECT count(*) AS c FROM items WHERE ${filter}`).bind(...binds).first<{c:number}>()
-    ]);return json({data:rows.results,total:total?.c||0});
-  }
-  const match=path.match(/^\/api\/items\/([^/]+)$/);
-  if(match){const id=decodeURIComponent(match[1]);if(!isId(id))return bad('Invalid item ID');const [item,rates,regs]=await Promise.all([
-    env.DB.prepare('SELECT * FROM items WHERE version=? AND id=?').bind(v,id).first(),
-    env.DB.prepare('SELECT * FROM rates WHERE version=? AND item_id=? ORDER BY tahun DESC,wilayah').bind(v,id).all(),
-    env.DB.prepare('SELECT r.*, ir.pasal,ir.lampiran,ir.halaman,ir.keterangan FROM item_regulations ir JOIN regulations r ON r.id=ir.regulation_id AND r.version=ir.version WHERE ir.version=? AND ir.item_id=? ORDER BY r.tahun DESC').bind(v,id).all()
-  ]);if(!item)return bad('Item not found',404);return json({data:{item,rates:rates.results,regulations:regs.results}});}
-  if(path==='/api/regulations'){const result=await env.DB.prepare('SELECT * FROM regulations WHERE version=? ORDER BY tahun DESC,nomor LIMIT ? OFFSET ?').bind(v,limit,offset).all();return json({data:result.results});}
-  if(path==='/api/documents'){const result=await env.DB.prepare("SELECT * FROM documents WHERE version=? AND status_publikasi='approved_public' ORDER BY tahun DESC,judul LIMIT ? OFFSET ?").bind(v,limit,offset).all();return json({data:result.results});}
-  if(path==='/api/faq'){const result=await env.DB.prepare("SELECT * FROM faqs WHERE version=? AND status='published' ORDER BY id LIMIT ? OFFSET ?").bind(v,limit,offset).all();return json({data:result.results});}
-  return bad('API route not found',404);
-}
-
-const LOGIN_COOKIE = 'portal_session';
+const USERNAME = 'standarbiaya';
+const COOKIE_NAME = 'sb_portal_session';
 const SESSION_SECONDS = 8 * 60 * 60;
+const jsonHeaders = {
+  'content-type': 'application/json; charset=utf-8',
+  'cache-control': 'private, no-store',
+  'x-content-type-options': 'nosniff',
+  'referrer-policy': 'no-referrer',
+};
+const response = (data: unknown, status = 200, more: Record<string, string> = {}) =>
+  new Response(JSON.stringify(data), { status, headers: { ...jsonHeaders, ...more } });
 
-function loginPage(error = false): Response {
-  const html = `<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Login - Portal Standar Biaya</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#102f50;font-family:Arial,sans-serif}
-.card{width:min(400px,92%);background:white;padding:36px;border-radius:14px;box-shadow:0 12px 35px #0003}
-h2{text-align:center;color:#12395d;margin-bottom:8px}
-p{text-align:center;color:#64748b;font-size:14px}
-label{display:block;margin:20px 0 7px;color:#12395d}
-input{width:100%;padding:13px;border:1px solid #cbd5e1;border-radius:7px;font-size:15px}
-button{width:100%;padding:14px;margin-top:25px;background:#d8b36b;border:0;border-radius:7px;font-weight:bold;cursor:pointer}
-.error{color:#b91c1c}
-</style>
-</head>
-<body>
-<div class="card">
-<h2>PORTAL STANDAR BIAYA</h2>
-<p>Login Administrator</p>
-${error ? '<p class="error">Username atau password salah.</p>' : ''}
-<form method="POST" action="/login">
-<label>Username</label>
-<input name="username" autocomplete="username" required>
-<label>Password</label>
-<input type="password" name="password" autocomplete="current-password" required>
-<button type="submit">MASUK KE PORTAL</button>
-</form>
-</div>
-</body>
-</html>`;
-
-  return new Response(html, {
-    headers: {
-      'content-type': 'text/html; charset=utf-8',
-      'cache-control': 'no-store',
-      'x-content-type-options': 'nosniff',
-      'content-security-policy':
-        "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
-      'referrer-policy': 'no-referrer'
-    }
-  });
+function safeEqual(a: string, b: string): boolean {
+  const aa = new TextEncoder().encode(a), bb = new TextEncoder().encode(b);
+  let diff = aa.length ^ bb.length;
+  for (let i = 0; i < Math.max(aa.length, bb.length); i++) diff |= (aa[i] || 0) ^ (bb[i] || 0);
+  return diff === 0;
 }
-
-function redirect(to: string, cookie?: string): Response {
-  const headers = new Headers({
-    location: to,
-    'cache-control': 'no-store'
-  });
-  if (cookie) headers.set('set-cookie', cookie);
-  return new Response(null, { status: 303, headers });
+function b64url(buffer: ArrayBuffer): string {
+  const bytes = new Uint8Array(buffer);
+  let s = '';
+  for (const b of bytes) s += String.fromCharCode(b);
+  return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
 }
-
-function sessionCookie(value: string, maxAge: number): string {
-  return `${LOGIN_COOKIE}=${value}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge}`;
-}
-
-function fromBase64Url(value: string): Uint8Array {
-  const normalized = value.replace(/-/g, '+').replace(/_/g, '/');
-  const binary = atob(normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '='));
-  return Uint8Array.from(binary, c => c.charCodeAt(0));
-}
-
-async function sessionKey(env: Env): Promise<CryptoKey> {
-  return crypto.subtle.importKey(
-    'raw',
-    new TextEncoder().encode(env.PORTAL_SESSION_SECRET),
-    { name: 'HMAC', hash: 'SHA-256' },
-    false,
-    ['sign', 'verify']
+async function signature(secret: string, payload: string): Promise<string> {
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
   );
+  const output = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+  return b64url(output);
 }
-
-async function createSession(env: Env): Promise<string> {
-  const expiry = String(Math.floor(Date.now() / 1000) + SESSION_SECONDS);
-  const signature = await crypto.subtle.sign(
-    'HMAC',
-    await sessionKey(env),
-    new TextEncoder().encode(expiry)
-  );
-  return `${expiry}.${b64url(new Uint8Array(signature))}`;
-}
-
-async function validSession(request: Request, env: Env): Promise<boolean> {
-  try {
-    const cookie = request.headers.get('cookie') || '';
-    const value = cookie.split(';').map(x => x.trim())
-      .find(x => x.startsWith(LOGIN_COOKIE + '='))
-      ?.slice(LOGIN_COOKIE.length + 1);
-
-    if (!value) return false;
-
-    const parts = value.split('.');
-    if (parts.length !== 2) return false;
-
-    const [expiry, signature] = parts;
-    if (!/^\d{10,11}$/.test(expiry)) return false;
-    if (Number(expiry) <= Math.floor(Date.now() / 1000)) return false;
-    if (Number(expiry) > Math.floor(Date.now() / 1000) + SESSION_SECONDS) return false;
-
-    return await crypto.subtle.verify(
-      'HMAC',
-      await sessionKey(env),
-      fromBase64Url(signature),
-      new TextEncoder().encode(expiry)
-    );
-  } catch {
-    return false;
+function getCookie(request: Request): string | null {
+  const cookies = request.headers.get('cookie') || '';
+  for (const section of cookies.split(';')) {
+    const [key, ...rest] = section.trim().split('=');
+    if (key === COOKIE_NAME) return rest.join('=');
   }
+  return null;
 }
-
+function configured(env: PortalAuthEnv): boolean {
+  return !!env.PORTAL_LOGIN_PASSWORD && !!env.PORTAL_SESSION_SECRET &&
+    env.PORTAL_SESSION_SECRET.length >= 32;
+}
+async function validSession(request: Request, env: PortalAuthEnv): Promise<boolean> {
+  if (!configured(env)) return false;
+  const cookie = getCookie(request);
+  if (!cookie || cookie.length > 200 || !/^v1\.\d{10,13}\.[\w-]{43}$/.test(cookie)) return false;
+  const parts = cookie.split('.');
+  const expires = Number(parts[1]);
+  const now = Math.floor(Date.now() / 1000);
+  if (!Number.isSafeInteger(expires) || expires <= now || expires > now + SESSION_SECONDS) return false;
+  const payload = `v1.${parts[1]}.${USERNAME}`;
+  return safeEqual(parts[2], await signature(env.PORTAL_SESSION_SECRET!, payload));
+}
+async function createSession(env: PortalAuthEnv): Promise<string> {
+  const expires = Math.floor(Date.now() / 1000) + SESSION_SECONDS;
+  const payload = `v1.${expires}.${USERNAME}`;
+  return `v1.${expires}.${await signature(env.PORTAL_SESSION_SECRET!, payload)}`;
+}
 function sameOrigin(request: Request): boolean {
-  return request.headers.get('origin') === new URL(request.url).origin;
+  const origin = request.headers.get('origin');
+  if (!origin) return false;
+  try { return new URL(origin).origin === new URL(request.url).origin; }
+  catch { return false; }
 }
+const loginCookie = (value: string) =>
+  `${COOKIE_NAME}=${value}; Path=/; Max-Age=${SESSION_SECONDS}; HttpOnly; Secure; SameSite=Strict`;
+const deleteCookie = () =>
+  `${COOKIE_NAME}=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Strict`;
 
-async function portalFetch(request: Request, env: Env): Promise<Response> {
-  const url = new URL(request.url);
-  const path = url.pathname;
-
-  if (!env.PORTAL_LOGIN_PASSWORD || !env.PORTAL_SESSION_SECRET || !env.ASSETS) {
-    return bad('Konfigurasi login belum lengkap', 503);
+/** Return a Response to stop the request, or null to continue normal API handling. */
+export async function portalAuthGuard(request: Request, env: PortalAuthEnv): Promise<Response | null> {
+  const path = new URL(request.url).pathname;
+  // Keep diagnostics available and preserve the independently authenticated admin sync.
+  if (path === '/api/health' || path === '/api/admin/sync') return null;
+  if (path === '/api/auth/session') {
+    if (request.method !== 'GET') return response({ error: 'Method not allowed' }, 405);
+    return response({ authenticated: await validSession(request, env) });
   }
-
-  // Endpoint sinkronisasi tetap memakai token admin yang sudah ada.
-  if (path === '/api/admin/sync') {
-    return handle(request, env);
-  }
-
-  if (path === '/login' && request.method === 'GET') {
-    if (await validSession(request, env)) return redirect('/');
-    return loginPage(url.searchParams.has('error'));
-  }
-
-  if (path === '/login' && request.method === 'POST') {
-    if (!sameOrigin(request)) return bad('Permintaan ditolak', 403);
-
-    const contentType = request.headers.get('content-type') || '';
-    if (!contentType.startsWith('application/x-www-form-urlencoded')) {
-      return bad('Format login tidak valid', 415);
+  if (path === '/api/auth/login') {
+    if (request.method !== 'POST') return response({ error: 'Method not allowed' }, 405);
+    if (!configured(env)) return response({ error: 'Login belum dikonfigurasi oleh pengelola.' }, 503);
+    if (!sameOrigin(request)) return response({ error: 'Invalid request origin' }, 403);
+    if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json'))
+      return response({ error: 'Format permintaan tidak valid' }, 415);
+    const size = Number(request.headers.get('content-length') || 0);
+    if (size > 1024) return response({ error: 'Permintaan terlalu besar' }, 413);
+    let credentials: { username?: unknown; password?: unknown };
+    try { credentials = await request.json() as typeof credentials; }
+    catch { return response({ error: 'Permintaan tidak valid' }, 400); }
+    if (typeof credentials?.username !== 'string' || typeof credentials?.password !== 'string' ||
+        credentials.username.length > 128 || credentials.password.length > 256 ||
+        !safeEqual(credentials.username, USERNAME) ||
+        !safeEqual(credentials.password, env.PORTAL_LOGIN_PASSWORD!)) {
+      return response({ error: 'Username atau password salah' }, 401);
     }
-
-    const body = await request.text();
-    if (body.length > 4096) return bad('Permintaan terlalu besar', 413);
-
-    const form = new URLSearchParams(body);
-    const username = form.get('username') || '';
-    const password = form.get('password') || '';
-
-    const usernameValid = secureEq(username, 'admin');
-    const passwordValid = secureEq(password, env.PORTAL_LOGIN_PASSWORD);
-
-    if (!usernameValid || !passwordValid) {
-      return redirect('/login?error=1');
-    }
-
-    const session = await createSession(env);
-    return redirect('/', sessionCookie(session, SESSION_SECONDS));
+    return response({ authenticated: true, username: USERNAME }, 200,
+      { 'set-cookie': loginCookie(await createSession(env)) });
   }
-
-  if (path === '/logout' && request.method === 'POST') {
-    if (!sameOrigin(request)) return bad('Permintaan ditolak', 403);
-    return redirect('/login', sessionCookie('', 0));
+  if (path === '/api/auth/logout') {
+    if (request.method !== 'POST') return response({ error: 'Method not allowed' }, 405);
+    if (!sameOrigin(request)) return response({ error: 'Invalid request origin' }, 403);
+    return response({ authenticated: false }, 200, { 'set-cookie': deleteCookie() });
   }
-
-  if (!(await validSession(request, env))) {
-    if (path.startsWith('/api/')) return bad('Unauthorized', 401);
-    return redirect('/login');
-  }
-
-  if (path.startsWith('/api/')) {
-    return handle(request, env);
-  }
-
-  const response = await env.ASSETS.fetch(request);
-  const headers = new Headers(response.headers);
-  headers.set('cache-control', 'private, no-store');
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers
-  });
+  if (!path.startsWith('/api/')) return null;
+  if (!configured(env)) return response({ error: 'Login belum dikonfigurasi oleh pengelola' }, 503);
+  if (!(await validSession(request, env))) return response({ error: 'Unauthorized' }, 401);
+  return null;
 }
-
-export default {
-  async fetch(request: Request, env: Env) {
-    try {
-      return await portalFetch(request, env);
-    } catch (e) {
-      console.error('Portal error', e);
-      return bad(
-        'Terjadi gangguan layanan. Coba beberapa saat lagi.',
-        500
-      );
-    }
-  },
-
-  async scheduled(
-    _event: ScheduledController,
-    env: Env,
-    ctx: ExecutionContext
-  ) {
-    if (env.ENABLE_SCHEDULED_SYNC !== 'true') return;
-
-    ctx.waitUntil(
-      sync(env)
-        .then(result =>
-          console.log('Scheduled sync success', result.version)
-        )
-        .catch(e =>
-          console.error(
-            'Scheduled sync failed; old dataset preserved',
-            String(e)
-          )
-        )
-    );
-  }
-} satisfies ExportedHandler<Env>;
