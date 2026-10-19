@@ -3,7 +3,11 @@
   "name": "portal-standar-biaya",
   "main": "worker/index.ts",
   "compatibility_date": "2026-10-13",
-  "assets": "assets": {
+  "assets": {
+  "not_found_handling": "single-page-application",
+  "binding": "ASSETS",
+  "run_worker_first": true
+}
   "not_found_handling": "single-page-application",
   "binding": "ASSETS",
   "run_worker_first": true
