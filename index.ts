@@ -5,7 +5,7 @@ type Env = {
   GOOGLE_SERVICE_ACCOUNT_EMAIL?:string;
   GOOGLE_PRIVATE_KEY?:string;
   SYNC_ADMIN_TOKEN?:string;
-  ENABLE_SCHEDULED_SYNC?:string;};
+  ENABLE_SCHEDULED_SYNC?:string;}
 type Row=Record<string,string>;
 const REQUIRED:Record<string,string[]>={
   MASTER_ITEM:['id','jenis','kelompok','subkelompok','nama','definisi','satuan','status'],
@@ -13,7 +13,7 @@ const REQUIRED:Record<string,string[]>={
   REGULASI:['id','jenis','nomor','tahun','judul','tanggal_berlaku','status','url','status_publikasi'],
   RELASI_REGULASI:['item_id','regulation_id','pasal','lampiran','halaman','keterangan'],
   DOKUMEN:['id','judul','kategori','tahun','deskripsi','drive_file_id','status_publikasi'],
-  FAQ:['id','pertanyaan','jawaban','referensi','status']};
+  FAQ:['id','pertanyaan','jawaban','referensi','status']}
 const HEADERS={'content-type':'application/json; charset=utf-8','cache-control':'public, max-age=60, stale-while-revalidate=120','x-content-type-options':'nosniff'};
 function json(data:unknown,status=200,headers:Record<string,string>={}){return new Response(JSON.stringify(data),{status,headers:{...HEADERS,...headers}})}
 function bad(message:string,status=400){return json({error:message},status,{'cache-control':'no-store'});}
