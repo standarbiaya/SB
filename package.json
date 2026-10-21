@@ -1,5 +1,5 @@
 {
   "name": "portal-standar-biaya-biru-muda", "version": "1.0.0", "private": true, "type": "module",
   "scripts": {"build":"node scripts/build.mjs", "dev":"npm run build && wrangler dev", "deploy":"npm run build && wrangler deploy", "check":"tsc --noEmit -p tsconfig.json"},
-  "devDependencies": {"@cloudflare/workers-types":"^4.20260901.0", "typescript":"^5.9.3", "wrangler":"^4.45.0"}
+  "devDependencies": {"@cloudflare/workers-types":"^5.20261019.1", "typescript":"^5.9.3", "wrangler":"^4.45.0"}
 }
