@@ -43,3 +43,7 @@ Gunakan **branch uji** lebih dahulu; setelah lulus verifikasi UI, login, data D1
 5. Setelah logout: akses tertutup kembali.
 6. Halaman Kamus, Detail, Regulasi, Dashboard, Pustaka, FAQ terbuka dan menampilkan data dari D1.
 7. Sinkronisasi service account dan cron tetap bekerja sesuai kebijakan internal.
+
+
+## Update Regulasi 2027
+Lihat `docs/PANDUAN-REGULASI-2027.md`. Penambahan katalog referensi frontend tidak mengubah database D1.
