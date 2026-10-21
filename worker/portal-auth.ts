@@ -15,36 +15,26 @@ async function authenticated(req:Request, env:AuthEnv): Promise<boolean> {if(!co
 
 
 
+
 function safeOrigin(req: Request): boolean {
   const expected = new URL(req.url).origin;
   const origin = req.headers.get('origin');
   const fetchSite = req.headers.get('sec-fetch-site');
 
-  // Tolak permintaan yang ditandai berasal dari situs lain.
-  if (fetchSite === 'cross-site' ||
-      fetchSite === 'same-site') {
-    return false;
-  }
-
-  // Origin normal harus sama dengan situs.
+  // Izinkan Origin yang cocok dengan alamat website.
   if (origin === expected) {
-    return true;
+    return fetchSite === 'same-origin';
   }
 
-  // Tangani Origin: null atau Origin yang tidak tersedia.
-  // Hanya terima jika browser memastikan same-origin.
+  // Tangani Origin: null dari browser Anda.
   if (origin === 'null' || origin === null) {
     return fetchSite === 'same-origin';
   }
 
+  // Tolak permintaan dari asal lain.
   return false;
 }
 
-
-
-  // Browser modern juga menyediakan informasi asal navigasi.
-  return req.headers.get('sec-fetch-site') === 'same-origin';
-}
 
 function redirect(path:string,cookie?:string) {const h=new Headers(noCache({location:path}));if(cookie)h.set('set-cookie',cookie);return new Response(null,{status:303,headers:h});}
 function loginPage(error=false) { const html=`<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Masuk — Portal Standar Biaya</title><style>*,*:before,*:after{box-sizing:border-box}body{font:16px system-ui,Arial;background:linear-gradient(140deg,#dff5ff,#f0f9ff 55%,#cbeeff);min-height:100vh;display:grid;place-items:center;margin:0;color:#153b64}.panel{width:min(430px,92vw);background:#fff;padding:42px;border-radius:22px;box-shadow:0 22px 70px #0f568c20;border:1px solid #d8ebf7}.brand{width:66px;height:66px;background:#e4f5fe;border-radius:18px;margin:auto;display:grid;place-items:center;font-size:32px}h1{text-align:center;font-size:23px;margin:18px 0 7px}p{text-align:center;color:#627e94;line-height:1.6;font-size:14px}label{display:block;margin:18px 0 7px;font-weight:650;font-size:14px}input{width:100%;padding:14px 16px;border:1px solid #b9d8ea;border-radius:11px;font-size:16px;outline-color:#2999d9}button{width:100%;padding:15px;border:none;background:#1686c5;color:#fff;font-weight:700;border-radius:11px;font-size:15px;margin-top:26px;cursor:pointer}.error{background:#fff0f1;color:#a52734;border-radius:10px;padding:12px}small{display:block;text-align:center;color:#7b96a9;margin-top:21px}</style></head><body><main class="panel"><div class="brand">⚖️</div><h1>Portal Standar Biaya</h1><p>Masuk untuk menjelajahi Kamus Standar Biaya dan informasi regulasi.</p>${error?'<p class="error">Username atau password tidak sesuai.</p>':''}<form action="/login" method="POST"><label for="username">Username</label><input id="username" name="username" autocomplete="username" required maxlength="80"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="256"><button type="submit">Masuk ke Portal →</button></form><small>Akses terbatas • Administrator</small></main></body></html>`;return new Response(html,{headers:noCache({'content-type':'text/html; charset=utf-8','content-security-policy':"default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",'referrer-policy':'same--origin'})}); }
