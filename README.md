@@ -50,3 +50,18 @@ Lihat `docs/PANDUAN-REGULASI-2027.md`. Penambahan katalog referensi frontend tid
 
 ## Lampiran KMK 296/2026 & KMK 57/2026
 Kedua PDF lengkap dan indeks pencarian 303 halaman disertakan. Lihat `docs/PANDUAN-KMK-296-DAN-57.md`. Tidak ada migrasi atau impor D1 otomatis.
+
+
+## Indeks Data Terstruktur
+Lihat `docs/PANDUAN-DATA-TERSTRUKTUR.md`. Data hasil ekstraksi PDF berstatus PERLU_REVIEW dan tidak otomatis ditulis ke database operasional.
+
+
+## Penambahan 3 PMK (21 Oktober 2026)
+Dokumen yang diberikan pengelola disalin tanpa modifikasi ke `public/regulasi/`:
+- `pmk-54-2026.pdf` (SBM; 12 halaman; digunakan mulai TA 2027)
+- `pmk-79-2025.pdf` (SSB; 7 halaman)
+- `pmk-3-2026.pdf` (SBK; 154 halaman; digunakan untuk RKA-K/L mulai 2026)
+
+Ditambah dua KMK lama, tersedia 5 PDF dan pencarian teks per halaman di menu Regulasi. Ini adalah penelusuran teks dokumen, bukan pengesahan besaran hasil OCR ke D1.
+
+Untuk upload: buat branch pengujian, unggah isi ZIP, pastikan `worker/portal-auth.ts` mempertahankan `safeOrigin` yang sudah berfungsi, cek Build dan Deploy, buka kelima tautan PDF setelah login. Jika file besar tidak dapat diunggah melalui antarmuka GitHub, gunakan GitHub Desktop. Jangan menimpa Secrets Cloudflare.
