@@ -47,3 +47,6 @@ Gunakan **branch uji** lebih dahulu; setelah lulus verifikasi UI, login, data D1
 
 ## Update Regulasi 2027
 Lihat `docs/PANDUAN-REGULASI-2027.md`. Penambahan katalog referensi frontend tidak mengubah database D1.
+
+## Lampiran KMK 296/2026 & KMK 57/2026
+Kedua PDF lengkap dan indeks pencarian 303 halaman disertakan. Lihat `docs/PANDUAN-KMK-296-DAN-57.md`. Tidak ada migrasi atau impor D1 otomatis.
