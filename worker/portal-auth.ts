@@ -14,31 +14,32 @@ function getCookie(req:Request) { return (req.headers.get('cookie')||'').split('
 async function authenticated(req:Request, env:AuthEnv): Promise<boolean> {if(!configValid(env))return false;const cookie=getCookie(req);const m=/^(\d{10})\.([A-Za-z0-9_-]{43})$/.exec(cookie);if(!m)return false;const exp=Number(m[1]);const now=Math.floor(Date.now()/1000);if(exp<=now||exp>now+TTL)return false;return constantEqual(m[2],await sign(env.PORTAL_SESSION_SECRET!,`v1.${m[1]}.${USERNAME}`));}
 
 
+
 function safeOrigin(req: Request): boolean {
   const expected = new URL(req.url).origin;
   const origin = req.headers.get('origin');
-  const referer = req.headers.get('referer');
   const fetchSite = req.headers.get('sec-fetch-site');
 
   // Tolak permintaan yang ditandai berasal dari situs lain.
-  if (fetchSite !== 'same-origin') return false;
+  if (fetchSite === 'cross-site' ||
+      fetchSite === 'same-site') {
+    return false;
+  }
 
-  // Terima Origin yang sama persis dengan portal.
-  if (origin === expected) return true;
+  // Origin normal harus sama dengan situs.
+  if (origin === expected) {
+    return true;
+  }
 
-  // Untuk Origin null atau tanpa Origin,
-  // wajib ada Referer dari portal yang sama.
+  // Tangani Origin: null atau Origin yang tidak tersedia.
+  // Hanya terima jika browser memastikan same-origin.
   if (origin === 'null' || origin === null) {
-    if (!referer) return false;
-    try {
-      return new URL(referer).origin === expected;
-    } catch {
-      return false;
-    }
+    return fetchSite === 'same-origin';
   }
 
   return false;
 }
+
 
 
   // Browser modern juga menyediakan informasi asal navigasi.
