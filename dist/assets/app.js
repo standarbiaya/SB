@@ -146,9 +146,7 @@ return `<section class="page-head">${pageIcon()}<span class="small-label">RINGKA
 
 <section class="map-block map-ssb" id="map-ssb"><header class="map-head"><span class="map-icon">${sbi('pie',26)}</span><div><h2>SSB: ${ssb.grup_kro.length} Grup KRO</h2><p>Batas tertinggi biaya pendukung terhadap total biaya RO, berlaku untuk seluruh K/L, RO, dan sumber dana.</p></div></header>
 <div class="kro-grid">${ssb.grup_kro.map((g,i)=>`<article class="kro"><div class="kro-ring" style="--p:${g.persen*10}"><span>${g.persen}%</span></div><div><small>Grup KRO ${i+1}</small><b>${escapeHTML(g.nama[0].toUpperCase()+g.nama.slice(1))}</b></div></article>`).join('')}</div>
-<p class="map-note">${icon('help',15)} Lingkaran menunjukkan besaran batas pada skala 0–10%.</p></section>
-
-<section class="map-block map-db"><header class="map-head"><span class="map-icon">${icon('chart',24)}</span><div><h2>Data di database portal</h2><p>Ringkasan publikasi terakhir dari Google Sheets.</p></div></header><section class="stats inpage">${stat(state.summary?.itemCount??'—','Total Item','book')}${stat(state.summary?.regulationCount??'—','Total Regulasi','file')}${stat(state.summary?.documentCount??'—','Total Dokumen','shield')}</section><section class="chart-panel"><h2>Distribusi Jenis Standar Biaya</h2>${(state.summary?.byType||[]).length?(state.summary.byType.map(x=>`<div class="bar-row"><span>${escapeHTML(x.name)}</span><div class="bar-track"><div style="width:${Math.round(100*Number(x.value)/(Math.max(1,...state.summary.byType.map(i=>Number(i.value)||0))))}%"></div></div><strong>${escapeHTML(x.value)}</strong></div>`).join('')):'<p>Belum ada ringkasan distribusi yang dipublikasikan.</p>'}</section></section>`;}
+<p class="map-note">${icon('help',15)} Lingkaran menunjukkan besaran batas pada skala 0–10%.</p></section>`;}
 
 let biayaCandidates=null;
 async function loadCandidates(){if(!biayaCandidates){const resp=await fetch('/data/kandidat-indeks.json',{credentials:'same-origin',cache:'no-store'});if(!resp.ok)throw Error('File indeks belum tersedia');biayaCandidates=await resp.json();}return biayaCandidates;}
