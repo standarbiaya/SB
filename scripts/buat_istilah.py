@@ -4,7 +4,7 @@ Sumber teks: public/regulasi/indeks-kmk.json (hasil ekstraksi PDF).
 - SBM: PMK 54/2026 (Pasal 1-2 dan definisi tiap jenis SBM di Lampiran I-II) + istilah
   pilihan dari bagian penjelasan KMK 296/2026.
 - SSB: PMK 79/2025 (Pasal 1, 3, dan 6).
-- SBK: PMK 3/2026 (Pasal 1-2, 4 dan Penjelasan SBK Umum) + KMK 57/2026 (diktum KEDUA).
+- SBK: hanya SBK Umum (SBKU) dari Penjelasan SBK Umum PMK 3/2026.
 
 Jalankan ulang setelah indeks teks diperbarui:  python3 scripts/buat_istilah.py
 """
@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 TEXT = ROOT / 'public/regulasi/indeks-kmk.json'
 OUT = ROOT / 'public/data/istilah.json'
 PDF = {'pmk54': '/regulasi/pmk-54-2026.pdf', 'kmk296': '/regulasi/kmk-296-2026.pdf', 'pmk79': '/regulasi/pmk-79-2025.pdf',
-       'pmk3': '/regulasi/pmk-3-2026.pdf', 'kmk57': '/regulasi/kmk-57-2026.pdf'}
+       'pmk3': '/regulasi/pmk-3-2026.pdf'}
 SIGNATURE = re.compile(r'MENTERI KEUANGAN REPUBLIK INDONESIA, (Ditandatangani secara elektronik |ttd\. )?PURBAYA YUDHI SADEWA')
 
 
@@ -176,26 +176,17 @@ def ssb_pmk79(pages):
 
 
 def sbk(pages):
-    t = joined(pages, 'pmk3', 1, 4)
-    out = [
-        entry('SBK', 'Ketentuan Umum', 'Standar Biaya Keluaran (SBK)', pasal(t, 'Standar Biaya Keluaran yang selanjutnya', ' Pasal 2'), 'pmk3', 'PMK 3/2026 Pasal 1', 2),
-        entry('SBK', 'Ketentuan Umum', 'SBK Umum', 'SBK yang berlaku untuk lebih dari 1 (satu) atau seluruh kementerian negara/lembaga. Tercantum dalam Lampiran I.', 'pmk3', 'PMK 3/2026 Pasal 2 ayat (2) dan Pasal 3 ayat (1)', 2),
-        entry('SBK', 'Ketentuan Umum', 'SBK Khusus', 'SBK yang berlaku untuk 1 (satu) kementerian negara/lembaga. Tercantum dalam Lampiran II.', 'pmk3', 'PMK 3/2026 Pasal 2 ayat (3) dan Pasal 3 ayat (2)', 2),
-        entry('SBK', 'Ketentuan Umum', 'Sifat Batas Tertinggi SBK', pasal(t, 'Penggunaan SBK umum dan SBK khusus bersifat', ' (3)'), 'pmk3', 'PMK 3/2026 Pasal 4 ayat (2)', 3),
-        entry('SBK', 'Ketentuan Umum', 'Rincian Indeks SBK', 'Rincian indeks standar biaya keluaran terdiri atas rincian indeks SBK umum (Lampiran I) dan rincian indeks SBK khusus (Lampiran II), digunakan untuk penyusunan Rencana Kerja dan Anggaran kementerian negara/lembaga mulai tahun 2026.', 'kmk57', 'KMK 57/2026 diktum KEDUA dan KETIGA', 2),
-    ]
+    """Hanya istilah SBK Umum (SBKU) dari Penjelasan SBK Umum huruf B PMK 3/2026."""
     p = joined(pages, 'pmk3', 9, 20)
-    umum = pasal(p, 'A. Ketentuan Umum SBK Umum (SBKU)', ' 6. Penuangan Volume')
-    for no, text in re.findall(r'(?<![\d.])(\d)\. (.+?)(?= \d\. [A-Z]|$)', umum):
-        m = re.match(r'(.+?) (?:adalah|merupakan) (.+)', text)
-        if m and no != '3':
-            out.append(entry('SBK', 'Ketentuan Umum SBK Umum', m.group(1), m.group(2), 'pmk3', f'PMK 3/2026 Penjelasan SBK Umum huruf A angka {no}', 9))
     bagian = p[p.index('B. Standar Biaya Keluaran Umum'):]
+    out = []
     for no, name, rest in re.findall(r'(?<![\w.])(\d{1,2})\. (SBK [^.]+?) (SBK [^.].+?)(?= \d{1,2}\. SBK |$)', bagian):
         definisi = re.split(r' (?:Penggunaan SBK ini|a\. SBK |[a-z]\. Layanan )', rest)[0]
         definisi = re.split(r'(?<=\.) (?=[A-Z])', definisi)[0] if len(definisi) > 700 else definisi
         out.append(entry('SBK', 'SBK Umum', name, definisi, 'pmk3', f'PMK 3/2026 Penjelasan SBK Umum huruf B angka {no}',
                          page_of(pages, 'pmk3', f'{no}. {name}', 9)))
+    if len(out) != 23:
+        raise ValueError(f'PMK 3/2026 seharusnya memuat 23 SBKU, terbaca {len(out)}')
     return out
 
 
