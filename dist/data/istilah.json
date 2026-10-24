@@ -1,0 +1,1005 @@
+{
+"catatan": "Disalin dari teks peraturan; periksa PDF untuk rumusan resmi.",
+"istilah": [
+{
+"jenis": "SBM",
+"kelompok": "Ketentuan Umum",
+"istilah": "Standar Biaya Masukan (SBM)",
+"definisi": "Standar Biaya Masukan yang selanjutnya disingkat SBM adalah standar biaya yang digunakan sebagai masukan (input) untuk menyusun rincian biaya dalam suatu keluaran.",
+"sumber": "PMK 54/2026 Pasal 1",
+"url": "/regulasi/pmk-54-2026.pdf#page=2"
+},
+{
+"jenis": "SBM",
+"kelompok": "Ketentuan Umum",
+"istilah": "Batas Tertinggi",
+"definisi": "Sifat penggunaan SBM berupa besaran biaya yang tidak dapat dilampaui. SBM yang bersifat batas tertinggi tercantum dalam Lampiran I.",
+"sumber": "PMK 54/2026 Pasal 2 ayat (3) dan Pasal 3 ayat (1)",
+"url": "/regulasi/pmk-54-2026.pdf#page=2"
+},
+{
+"jenis": "SBM",
+"kelompok": "Ketentuan Umum",
+"istilah": "Dapat Dilampaui",
+"definisi": "Sifat penggunaan SBM yang dapat dilampaui dalam pelaksanaan anggaran dengan mempertimbangkan: a. harga pasar; dan b. prinsip ekonomis, efisien, dan efektif. SBM yang bersifat dapat dilampaui tercantum dalam Lampiran II.",
+"sumber": "PMK 54/2026 Pasal 2 ayat (4) dan Pasal 3 ayat (2)",
+"url": "/regulasi/pmk-54-2026.pdf#page=2"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Penanggung Jawab Pengelola Keuangan",
+"definisi": "Honorarium yang diberikan kepada Pegawai Negeri Sipil (PNS)/Prajurit Tentara Nasional Indonesia (TNI)/Anggota Kepolisian Republik Indonesia (POLRI) yang ditugaskan sebagai Kuasa Pengguna Anggaran (KPA), Pejabat Pembuat Komitmen (PPK), Pejabat Penguji Tagihan dan Penandatangan Surat Perintah Membayar, Bendahara Pengeluaran, dan kepada seseorang yang diberi tugas sebagai Staf Pengelola Keuangan (SPK)/Bendahara Pengeluaran Pembantu/Petugas Pengelola Administrasi Belanja Pegawai (PPABP).",
+"sumber": "PMK 54/2026 Lampiran I angka 1 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=5"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Pengadaan Barang/Jasa",
+"definisi": "Honorarium yang diberikan kepada seseorang yang ditugaskan sebagai : a. Pejabat Pengadaan Barang/Jasa; b. Kelompok Kerja Pemilihan; atau c. Pengguna Anggaran, untuk melaksanakan pemilihan penyedia barang/jasa sesuai dengan ketentuan peraturan perundang-undangan.",
+"sumber": "PMK 54/2026 Lampiran I angka 2 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=5"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Perangkat Unit Kerja Pengadaan Barang dan Jasa (UKPBJ)",
+"definisi": "Honorarium yang diberikan kepada seseorang yang diberi tugas tambahan sebagai perangkat pada UKPBJ.",
+"sumber": "PMK 54/2026 Lampiran I angka 3 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=5"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Pengelola Penerimaan Negara Bukan Pajak (PNBP)",
+"definisi": "Honorarium diberikan kepada Pegawai Aparatur Sipil Negara (ASN)/Prajurit TNI/Anggota POLRI yang diberi tugas oleh pejabat yang berwenang untuk mengelola PNBP fungsional.",
+"sumber": "PMK 54/2026 Lampiran I angka 4 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=5"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Pengelola Sistem Akuntansi dan Pelaporan Keuangan Instansi (SAI)",
+"definisi": "Honorarium yang diberikan kepada Pegawai ASN/Prajurit TNI/Anggota POLRI yang diberi tugas melakukan pengumpulan data, pencatatan, pengikhtisaran sampai dengan pelaporan posisi keuangan, dan operasi keuangan pada kementerian negara/lembaga sesuai dengan unit akuntansi masing-masing, baik yang dikelola secara prosedur manual maupun terkomputerisasi.",
+"sumber": "PMK 54/2026 Lampiran I angka 5 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=5"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Pengurus/Penyimpan Barang Milik Negara",
+"definisi": "Honorarium yang diberikan kepada Pegawai ASN/Prajurit TNI/Anggota POLRI di lingkungan Pengguna Barang dan Kuasa Pengguna Barang yang melaksanakan tugas rutin selaku pengurus/penyimpan barang yang menghasilkan penerimaan negara.",
+"sumber": "PMK 54/2026 Lampiran I angka 6 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=5"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Penunjang Penelitian/Perekayasaan",
+"definisi": "Honorarium yang diberikan kepada seseorang yang ditugaskan sebagai pembantu peneliti/perekayasa, pengolah data, petugas survei, dan pembantu lapangan untuk menunjang kegiatan penelitian perekayasaan yang dilakukan oleh fungsional peneliti/perekayasan/tenaga pendidik dan tenaga kependidikan dalam rangka penyelenggaraan Tri Darma Perguruan Tinggi.",
+"sumber": "PMK 54/2026 Lampiran I angka 7 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=5"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Komite Penelitian",
+"definisi": "Honorarium yang diberikan kepada Komite Penilaian dan/atau Reviewer Proposal, Komite Penilaian dan/atau Reviewer Keluaran Penelitian, dan Komite Etik Penelitian.",
+"sumber": "PMK 54/2026 Lampiran I angka 8 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=6"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Narasumber/Moderator/Pembawa Acara/Panitia Kelompok",
+"definisi": "Honorarium yang diberikan kepada Pejabat Negara/Pegawai ASN/Prajurit TNI/Anggota POLRI dalam kegiatan Seminar/Rapat/ Sosialisasi/Diseminasi/Bimbingan Teknis/ Workshop/ Sarasehan/ Simposium/Lokakarya/Focus Group Discussion/Kegiatan Sejenis yang dilaksanakan secara luar jaringan (offline) maupun dalam jaringan (online) melalui aplikasi secara live dan bukan rekaman/hasil taping, baik di dalam negeri maupun di luar negeri.",
+"sumber": "PMK 54/2026 Lampiran I angka 9 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=6"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Pemberi Keterangan Ahli/Saksi Ahli dan Beracara",
+"definisi": "Honorarium yang diberikan kepada Pejabat Negara/Pegawai ASN/Prajurit TNI/Anggota POLRI yang diberi tugas menghadiri dan memberikan informasi/keterangan sesuai dengan keahlian di bidang tugasnya yang diperlukan dalam tingkat penyidikan dan/atau persidangan di pengadilan, atau beracara mewakili instansi pemerintah dalam persidangan pengadilan.",
+"sumber": "PMK 54/2026 Lampiran I angka 10 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=6"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Penyelenggaraan Kegiatan Pendidikan pada Lingkup Pendidikan Tinggi",
+"definisi": "Honorarium yang diberikan atas pelaksanaan tugas tambahan/tugas khusus tertentu, penyelenggara kegiatan akademik dan kemahasiswaan serta penugasan lain dalam rangka penyelenggaraan kegiatan pendidikan pada lingkup pendidikan tinggi.",
+"sumber": "PMK 54/2026 Lampiran I angka 11 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=6"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Penyuluh Non Aparatur Sipil Negara (ASN)",
+"definisi": "Honorarium diberikan sebagai pengganti upah kerja kepada non pegawai ASN yang ditugaskan untuk melakukan penyuluhan.",
+"sumber": "PMK 54/2026 Lampiran I angka 12 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=6"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Rohaniwan",
+"definisi": "Honorarium yang diberikan kepada seseorang yang ditugaskan oleh pejabat yang berwenang sebagai rohaniwan dalam pengambilan sumpah jabatan.",
+"sumber": "PMK 54/2026 Lampiran I angka 13 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=6"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Tim Pelaksana Kegiatan dan Sekretariat Tim Pelaksana Kegiatan",
+"definisi": "Honorarium yang diberikan kepada seseorang yang berdasarkan Keputusan Presiden/Menteri/Pejabat Setingkat Menteri/ Pejabat Eselon I/KPA diangkat dalam suatu tim pelaksana kegiatan atau Sekretariat Tim Pelaksana Kegiatan untuk melaksanakan suatu tugas tertentu atau melaksanakan kegiatan administratif untuk menunjang kegiatan tim pelaksana kegiatan.",
+"sumber": "PMK 54/2026 Lampiran I angka 14 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=6"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Penyusunan Jurnal dan Pembuat Artikel",
+"definisi": "Honorarium yang diberikan dalam rangka penyusunan jurnal baik cetak maupun elektronik, atau berkontribusi dalam penulisan artikel pada Jurnal/Buletin/Majalah/Website.",
+"sumber": "PMK 54/2026 Lampiran I angka 15 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=6"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Panitia Penyelenggara/Tuan Rumah Sidang/Konferensi Internasional/ Konferensi Tingkat Menteri, Senior Official Meeting (Bilateral/Regional/Multilateral),Workshop/Seminar/Sosialisasi/Sarasehan Berskala Internasional",
+"definisi": "Honorarium yang dapat diberikan kepada Pejabat Negara/ASN/Prajurit TNI/Anggota POLRI yang berdasarkan surat keputusan pejabat berwenang menjadi penyelenggara suatu kegiatan sidang/konferensi yang dihadiri pejabat setingkat Menteri/senior official atau penyelenggara kegiatan workshop/seminar/sosialisasi/sarasehan berskala internasional.",
+"sumber": "PMK 54/2026 Lampiran I angka 16 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=7"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Penyelenggara Ujian dan Vakasi",
+"definisi": "Honorarium yang diberikan bagi penyusun/pembuat bahan ujian, pengawas ujian, penguji atau pemeriksa hasil ujian pada pendidikan tingkat dasar, dan menengah.",
+"sumber": "PMK 54/2026 Lampiran I angka 17 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=7"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Seleksi Tingkat Nasional",
+"definisi": "Honorarium yang diberikan kepada Pegawai ASN/Prajurit TNI/Anggota POLRI maupun non Pegawai Aparatur Sipil Negara dalam penyelenggaraan seleksi tingkat nasional baik secara tertulis maupun berbasis komputer/Computer Assisted Test (CAT).",
+"sumber": "PMK 54/2026 Lampiran I angka 18 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=7"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Penyelenggaraan Kegiatan Pendidikan dan Pelatihan (Diklat)",
+"definisi": "Honorarium yang diberikan dalam rangka penyelenggara kegiatan pendidikan dan pelatihan atau memberikan wawasan pengetahuan dan/atau sharing experience sesuai dengan keahliannya kepada peserta kegiatan itu.",
+"sumber": "PMK 54/2026 Lampiran I angka 19 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=6"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Satpam, Pengemudi, Petugas Kebersihan, dan Pramubakti",
+"definisi": "Honorarium yang diberikan kepada satpam, pengemudi, petugas kebersihan, dan pramubakti berdasarkan surat keputusan pejabat yang berwenang/kontrak kerja .",
+"sumber": "PMK 54/2026 Lampiran I angka 20 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=7"
+},
+{
+"jenis": "SBM",
+"kelompok": "Fasilitas",
+"istilah": "Satuan Biaya Uang Makan bagi Pegawai ASN dan Uang Lauk Pauk bagi Prajurit TNI/Anggota POLRI",
+"definisi": "Satuan biaya yang diberikan bagi Pegawai ASN/Prajurit TNI/Anggota POLRI untuk kebutuhan uang makan/lauk pauk.",
+"sumber": "PMK 54/2026 Lampiran I angka 21 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=7"
+},
+{
+"jenis": "SBM",
+"kelompok": "Fasilitas",
+"istilah": "Satuan Biaya Uang Lembur dan Uang Makan Lembur bagi Pegawai ASN",
+"definisi": "Honorarium yang diberikan sebagai kompensasi bagi ASN yang melakukan kerja lembur.",
+"sumber": "PMK 54/2026 Lampiran I angka 22 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=7"
+},
+{
+"jenis": "SBM",
+"kelompok": "Fasilitas",
+"istilah": "Satuan Biaya Pengadaan Pakaian Dinas",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya pengadaan pakaian dinas termasuk ongkos jahit.",
+"sumber": "PMK 54/2026 Lampiran I angka 23 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=7"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Pengepakan dan Angkutan Barang Perjalanan Dinas Pindah Dalam Negeri",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya pengepakan dan angkutan barang pindahan yang diberikan kepada pejabat negara/pegawai ASN yang dipindahtugaskan berdasarkan Keputusan pejabat yang berwenang.",
+"sumber": "PMK 54/2026 Lampiran I angka 24 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=7"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Uang Harian dan Uang Representasi Perjalanan Dinas Dalam Negeri",
+"definisi": "Satuan biaya berupa penggantian/kompensasi biaya keperluan sehari-hari Pejabat Negara/Pegawai ASN/Prajurit TNI/Anggota POLRI/Pihak Lain dalam menjalankan perintah perjalanan dinas di dalam negeri, serta uang representasi yang diberikan kepada pejabat negara (ketua/wakil ketua dan anggota lembaga tinggi negara, menteri serta setingkat menteri), wakil menteri, pejabat eselon I dan pejabat eselon II yang hanya melaksanakan perjalanan dinas jabatan dalam rangka pelaksanaan tugas dan fungsi yang melekat pada jabatan, dan sesuai dengan ketentuan peraturan perundang-undangan mengenai perjalanan dinas.",
+"sumber": "PMK 54/2026 Lampiran I angka 25 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=8"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Uang Harian Perjalanan Dinas Luar Negeri",
+"definisi": "Satuan biaya berupa penggantian biaya keperluan sehari-hari Pejabat Negara/Pegawai ASN/Prajurit TNI/Anggota POLRI/pihak lain dalam menjalankan perintah perjalanan dinas di luar negeri sesuai dengan ketentuan peraturan perundang-undangan mengenai perjalanan dinas.",
+"sumber": "PMK 54/2026 Lampiran I angka 26 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=8"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Penginapan Perjalanan Dinas Dalam Negeri",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya menginap dalam rangka pelaksanaan perjalanan dinas dalam negeri sesuai dengan ketentuan peraturan perundang-undangan mengenai perjalanan dinas.",
+"sumber": "PMK 54/2026 Lampiran I angka 27 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=8"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Tiket Perjalanan Dinas Pindah Luar Negeri (One Way)",
+"definisi": "Satuan biaya untuk kebutuhan biaya pembelian tiket pesawat udara perjalanan dinas pindah dan diberikan untuk 1 (satu) kali jalan (one way), diberikan kepada Pejabat Negara/Pegawai ASN/Prajurit TNI/Anggota POLRI dan keluarga yang sah berdasarkan surat keputusan pindah dari pejabat yang berwenang sesuai dengan ketentuan peraturan perundang-undangan yang digunakan untuk melaksanakan perintah pindah dari perwakilan Republik Indonesia di luar negeri atau sebaliknya.",
+"sumber": "PMK 54/2026 Lampiran I angka 28 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=8"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Rapat/Pertemuan di Luar Kantor",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya kegiatan rapat/pertemuan yang diselenggarakan di luar kantor dalam rangka penyelesaian pekerjaan sesuai tugas dan fungsi yang perlu dilakukan secara intensif dan bersifat koordinatif.",
+"sumber": "PMK 54/2026 Lampiran I angka 29 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=8"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Uang Lembur dan Uang Makan Lembur bagi Pegawai Non ASN, Satpam, Pengemudi, Petugas Kebersihan, dan Pramubakti",
+"definisi": "Honorarium yang diberikan sebagai kompensasi bagi Pegawai Non ASN, Satpam, Pengemudi, Petugas Kebersihan, dan Pramubakti yang melakukan kerja lembur.",
+"sumber": "PMK 54/2026 Lampiran I angka 30 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=7"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Operasional Penyuluh",
+"definisi": "Satuan Biaya yang digunakan untuk kebutuhan biaya transportasi bagi para Pegawai ASN sebagai penyuluh dalam rangka mengunjungi daerah binaannya sebagaimana dimaksud pada Undang-Undang Nomor 16 Tahun 2006 tentang Sistem Penyuluhan Pertanian, Perikanan, dan Kehutanan.",
+"sumber": "PMK 54/2026 Lampiran I angka 31 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=8"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Operasional Khusus Kepala Perwakilan Republik Indonesia di Luar Negeri",
+"definisi": "Satuan biaya dana operasional yang digunakan untuk menunjang pelaksanaan misi khusus Kepala Perwakilan Republik Indonesia di Luar Negeri dan bukan merupakan tambahan penghasilan.",
+"sumber": "PMK 54/2026 Lampiran I angka 32 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=8"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Pengadaan Kendaraan Dinas",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya pengadaan kendaraan operasional bagi pejabat, operasional kantor, dan/atau lapangan serta bus melalui pembelian guna menunjang pelaksanaan tugas dan fungsi kementerian negara/lembaga.",
+"sumber": "PMK 54/2026 Lampiran I angka 33 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=9"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Sewa Kendaraan",
+"definisi": "Satuan biaya yang digunakan untuk sewa kendaraan pelaksanaan kegiatan insidentil (tidak bersifat terus-menerus) dan sewa kendaraan operasional pejabat/Pejabat Eselon III sebagai kepala kantor/operasional kantor dan/atau lapangan.",
+"sumber": "PMK 54/2026 Lampiran I angka 34 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=9"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Makanan Penambah Daya Tahan Tubuh",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya pengadaan makanan/minuman bergizi yang dapat menambah/meningkatkan/ mempertahankan daya tahan tubuh Pegawai ASN tertentu, yaitu yang diberi tugas melaksanakan pekerjaan tugas dan fungsi kantor yang dapat berdampak buruk bagi kesehatan pegawai dimaksud.",
+"sumber": "PMK 54/2026 Lampiran I angka 35 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=9"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Konsumsi Rapat/Pertemuan",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya pengadaan makanan dan kudapan termasuk minuman untuk rapat/pertemuan koordinasi, maupun untuk rapat biasa.",
+"sumber": "PMK 54/2026 Lampiran I angka 36 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=9"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Konsumsi Kegiatan Pendidikan dan Pelatihan (Diklat)",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya pengadaan makanan dan kudapan termasuk minuman untuk kegiatan Pendidikan dan Pelatihan (Diklat) yang dilaksanakan secara klasikal (tatap muka).",
+"sumber": "PMK 54/2026 Lampiran I angka 37 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=9"
+},
+{
+"jenis": "SBM",
+"kelompok": "Bantuan",
+"istilah": "Uang Harian Magang Mahasiswa",
+"definisi": "Uang harian yang diberikan kepada mahasiswa level Strata 1 atau Diploma IV yang mendapatkan penugasan wajib dari perguruan tinggi untuk melaksanakan magang kerja di satuan kerja di lingkup kementerian negara/lembaga.",
+"sumber": "PMK 54/2026 Lampiran I angka 38 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=9"
+},
+{
+"jenis": "SBM",
+"kelompok": "Bantuan",
+"istilah": "Satuan Biaya Bantuan Biaya Pendidikan Anak (BBPA) pada Perwakilan Republik Indonesia di Luar Negeri",
+"definisi": "Satuan biaya berupa bantuan biaya pendidikan anak-anak Pejabat Dinas Luar Negeri/Home Staff/Atase Teknis/Atase Pertahanan yang bekerja pada Perwakilan Republik Indonesia di Luar Negeri.",
+"sumber": "PMK 54/2026 Lampiran I angka 39 (batas tertinggi)",
+"url": "/regulasi/pmk-54-2026.pdf#page=9"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Narasumber Pakar/Praktisi/Profesional",
+"definisi": "Satuan biaya untuk kebutuhan narasumber pakar/praktisi/ profesional dari luar lingkup kementerian negara/lembaga penyelenggara yang mempunyai keahlian/profesionalisme dalam ilmu/bidang tertentu dalam kegiatan seminar/rapat/sosialisasi/diseminasi/workshop/sarasehan/simposium/diklat /lokakarya/Focus Group Discussion/kegiatan sejenis.",
+"sumber": "PMK 54/2026 Lampiran II angka 1 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=10"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Transportasi Darat dari Ibu Kota Provinsi ke Kabupaten/Kota dalam Provinsi yang Sama (One Way)",
+"definisi": "Satuan biaya untuk kebutuhan biaya transportasi darat bagi Pejabat Negara/Pegawai ASN/Prajurit TNI/Anggota POLRI/pihak lain dari tempat kedudukan di ibu kota provinsi ke tempat tujuan di kabupaten/kota tujuan dalam 1 (satu) provinsi yang sama atau sebaliknya dalam rangka pelaksanaan perjalanan dinas dalam negeri.",
+"sumber": "PMK 54/2026 Lampiran II angka 2 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=10"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Transportasi dari DKI Jakarta ke Kabupaten/Kota Sekitar (One Way)",
+"definisi": "Satuan biaya kebutuhan transportasi bagi Pejabat Negara/Pegawai ASN/Prajurit TNI/Anggota POLRI/pihak lain dari: a. Daerah Khusus Jakarta ke kota sekitar; atau b. kota sekitar ke Daerah Khusus Jakarta; dalam rangka pelaksanaan perjalanan dinas dalam negeri.",
+"sumber": "PMK 54/2026 Lampiran II angka 3 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=10"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Transpor Kegiatan dalam Kabupaten/Kota Pergi Pulang (PP)",
+"definisi": "Satuan biaya untuk kebutuhan transportasi Pejabat Negara/Pegawai ASN/Prajurit TNI/Anggota POLRI/pihak lain dalam melakukan kegiatan/pekerjaan di luar kantor dalam batas wilayah suatu kabupaten/kota Pulang Pergi (PP) yang berkaitan dengan pelaksanaan tugas kantor/instansi dengan ketentuan tidak menggunakan kendaraan dinas.",
+"sumber": "PMK 54/2026 Lampiran II angka 4 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=10"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Transportasi dari dan/atau ke Terminal Bus/Stasiun/ Bandara/Pelabuhan dalam rangka Perjalanan Dinas Dalam Negeri",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya satu kali perjalanan menuju/dari terminal bus/stasiun/bandara/pelabuhan keberangkatan atau dari terminal bus/stasiun/bandara/pelabuhan kedatangan menuju tempat di kota tujuan kedatangan dan sebaliknya.",
+"sumber": "PMK 54/2026 Lampiran II angka 5 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=10"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Tiket Pesawat Perjalanan Dinas Dalam Negeri Pergi Pulang (PP)",
+"definisi": "Satuan biaya untuk pembelian tiket pesawat udara pergi pulang (PP) dari bandara keberangkatan suatu kota ke bandara kota tujuan.",
+"sumber": "PMK 54/2026 Lampiran II angka 6 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=10"
+},
+{
+"jenis": "SBM",
+"kelompok": "Perjalanan Dinas",
+"istilah": "Satuan Biaya Tiket Pesawat Perjalanan Dinas Luar Negeri Pergi Pulang (PP)",
+"definisi": "Satuan biaya untuk kebutuhan biaya pembelian tiket pesawat udara dari bandara di Jakarta ke berbagai bandara kota tujuan di luar negeri pergi pulang (PP).",
+"sumber": "PMK 54/2026 Lampiran II angka 7 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=10"
+},
+{
+"jenis": "SBM",
+"kelompok": "Pemeliharaan",
+"istilah": "Satuan Biaya Pemeliharaan Sarana Kantor",
+"definisi": "Satuan biaya untuk memenuhi kebutuhan dalam rangka memelihara atau mempertahankan barang inventaris kantor.",
+"sumber": "PMK 54/2026 Lampiran II angka 8 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=11"
+},
+{
+"jenis": "SBM",
+"kelompok": "Pemeliharaan",
+"istilah": "Satuan Biaya Pemeliharaan dan Operasional Kendaraan Dinas",
+"definisi": "Satuan biaya untuk kebutuhan pemeliharaan dan operasional kendaraan dinas yang digunakan untuk mempertahankan kendaraan dinas agar tetap dalam kondisi normal dan siap pakai sesuai dengan peruntukannya.",
+"sumber": "PMK 54/2026 Lampiran II angka 9 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=11"
+},
+{
+"jenis": "SBM",
+"kelompok": "Pemeliharaan",
+"istilah": "Satuan Biaya Pemeliharaan Gedung/Bangunan Dalam Negeri",
+"definisi": "Satuan biaya untuk kebutuhan rutin gedung/bangunan di dalam negeri dengan maksud menjaga/ mempertahankan gedung dan bangunan kantor di dalam negeri agar tetap dalam kondisi semula atau perbaikan dengan tingkat kerusakan kurang dari atau sama dengan 2% (dua perseratus).",
+"sumber": "PMK 54/2026 Lampiran II angka 10 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=11"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Penerjemahan dan Pengetikan",
+"definisi": "Satuan biaya untuk kebutuhan biaya jasa pihak ketiga untuk penerjemahan dan pengetikan dari naskah asli ke dalam bahasa yang diinginkan.",
+"sumber": "PMK 54/2026 Lampiran II angka 11 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=11"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Sewa Mesin Fotokopi",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya sewa mesin fotokopi untuk menunjang pelaksanaan operasional kantor.",
+"sumber": "PMK 54/2026 Lampiran II angka 12 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=11"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Pengadaan Bahan Makanan",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan pengadaan bahan makanan yang diberikan untuk: a. Narapidana/tahanan dan anak di Lapas/Rutan. b. Operasi Pasukan/Latihan Pratugas/Latihan Pasukan Lainnya Bagi Prajurit TNI/Anggota POLRI, Dikma/ Taruna/Karbol/Kadet Bagi Prajurit TNI/Anggota POLRI, Diklat Lainnya Bagi Kementerian Pertahanan (Kemhan)/Prajurit TNI/Anggota POLRI, Anggota yang Sakit Bagi Kemhan/Prajurit TNI/Anggota POLRI, Tahanan Prajurit TNI/Anggota POLRI, dan Jaga Kawal Bagi Kemhan/Prajurit TNI/Anggota POLRI. c. Pasien Rumah Sakit dan Penyandang Masalah Kesejahteraan Sosial (PMKS). d. Keluarga Penjaga Menara Suar (PMS), Petugas Pengamatan Laut, Anak Buah Kapal (ABK) Cadangan pada Kapal Negara, ABK Aktif pada Kapal Negara, dan Petugas Stasiun Radio Pantai (SROP) dan Vessel Traffic Information Service (VTIS). e. Petugas Bengkel dan Galangan Kapal Kenavigasian, Petugas Pabrik Gas Aga untuk Lampu Suar, PMS, dan Kelompok Tenaga Kesehatan Kerja Pelayaran. f. Mahasiswa/Siswa Sipil dan Mahasiswa Militer/Semi Militer di Lingkup Sekolah Kedinasan. g. Rescue Team.",
+"sumber": "PMK 54/2026 Lampiran II angka 13 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=11"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Konsumsi Tahanan/Deteni/Anak Buah Kapal (ABK) Nonjustisia",
+"definisi": "Satuan biaya yang digunakan untuk kebutuhan biaya pengadaan paket makanan tahanan/deteni/ABK nonjustisia.",
+"sumber": "PMK 54/2026 Lampiran II angka 14 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=12"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Kebutuhan Dasar Perkantoran di Dalam Negeri",
+"definisi": "Satuan biaya yang digunakan untuk memenuhi kebutuhan dasar perkantoran berupa barang habis pakai yang secara langsung menunjang penyelenggaraan operasional dan untuk memenuhi kebutuhan dasar agar suatu kantor dapat memberikan pelayanan secara optimal.",
+"sumber": "PMK 54/2026 Lampiran II angka 15 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=12"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Penggantian Inventaris Lama dan/atau Pembelian Inventaris untuk Pegawai Baru",
+"definisi": "Satuan biaya untuk kebutuhan biaya penggantian inventaris lama dan/atau pembelian inventaris bagi pegawai baru.",
+"sumber": "PMK 54/2026 Lampiran II angka 16 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=12"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Sewa Gedung Pertemuan",
+"definisi": "Satuan biaya untuk kebutuhan sewa gedung pertemuan untuk pelaksanaan kegiatan di luar kantor antara lain rapat koordinasi, sosialisasi, seleksi/ujian masuk pegawai, dan kegiatan lain sejenis.",
+"sumber": "PMK 54/2026 Lampiran II angka 17 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=12"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Satuan Biaya Penyelenggaraan Perwakilan Republik Indonesia di Luar Negeri",
+"definisi": "Satuan biaya untuk kebutuhan biaya penyelenggaraan operasional perwakilan Republik Indonesia di luar negeri.",
+"sumber": "PMK 54/2026 Lampiran II angka 18 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=12"
+},
+{
+"jenis": "SBM",
+"kelompok": "Bantuan",
+"istilah": "Satuan Biaya Bantuan Beasiswa Program Gelar/Nongelar Dalam Negeri",
+"definisi": "Satuan biaya bantuan beasiswa program gelar/nongelar dalam negeri merupakan satuan biaya yang digunakan untuk kebutuhan biaya bantuan mahasiswa program gelar/nongelar dalam negeri bagi Pegawai ASN/Prajurit TNI/Anggota POLRI yang ditugaskan untuk melanjutkan pendidikan Diploma I, Diploma III, Diploma IV atau Strata 1 (S1), dan pendidikan Pascasarjana (Strata 2 (S2) atau Strata 3 (S3)).",
+"sumber": "PMK 54/2026 Lampiran II angka 19 (dapat dilampaui)",
+"url": "/regulasi/pmk-54-2026.pdf#page=12"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Unit Kerja Pengadaan Barang/Jasa (UKPBJ)",
+"definisi": "Yang dimaksud dengan UKPBJ adalah unit yang struktur organisasinya dilekatkan pada unit organisasi yang sudah ada.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=52"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Satuan Jam Honorarium Narasumber",
+"definisi": "Satuan jam yang digunakan dalam pemberian honorarium narasumber adalah 60 (enam puluh) menit baik dilakukan secara panel maupun individual.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=53"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Sekretariat Tim Pelaksana Kegiatan",
+"definisi": "Sekretariat tim pelaksana kegiatan merupakan bagian tidak terpisahkan dari tim pelaksana kegiatan.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=56"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Unsur Sekretariat",
+"definisi": "Unsur sekretariat adalah pembantu umum, pelaksana dan yang sejenis, dan tidak berupa struktur organisasi tersendiri.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=57"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Honorarium Pelaksana Ujian Tingkat Nasional",
+"definisi": "Honorarium Pelaksana Ujian Tingkat Nasional adalah honorarium yang diberikan kepada petugas pelaksana ujian tingkat nasional termasuk pengawas dan untuk melakukan pengawasan selama pelaksanaan ujian tingkat nasional.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=59"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Koordinator (Ujian Tingkat Nasional)",
+"definisi": "Koordinator adalah petugas yang berperan sebagai ketua pelaksana ujian tingkat nasional yang mengambil keputusan dalam satu kali kegiatan ujian tingkat nasional.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=59"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Petugas Utama (Ujian Tingkat Nasional)",
+"definisi": "Petugas Utama adalah petugas yang berperan sebagai pengawas ujian atau petugas bidang Teknologi Informasi pada ujian berbasis komputer.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=59"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Petugas Pendukung (Ujian Tingkat Nasional)",
+"definisi": "Petugas Pendukung adalah petugas yang berperan sebagai pendukung kegiatan yaitu petugas kesehatan dan petugas teknis administrasi.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=59"
+},
+{
+"jenis": "SBM",
+"kelompok": "Honorarium",
+"istilah": "Jam Pelajaran Diklat",
+"definisi": "Jam pelajaran yang digunakan untuk kegiatan penyelenggaraan diklat adalah 45 (empat puluh lima) menit.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=60"
+},
+{
+"jenis": "SBM",
+"kelompok": "Fasilitas",
+"istilah": "Uang Lembur",
+"definisi": "Uang lembur merupakan kompensasi bagi Pegawai ASN yang melakukan kerja lembur berdasarkan surat perintah dari pejabat yang berwenang.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=60"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Rapat Koordinasi Tingkat Menteri/Wakil Menteri/Eselon I/Setara",
+"definisi": "Rapat koordinasi tingkat menteri/wakil menteri/eselon I/setara adalah rapat koordinasi yang pesertanya menteri/wakil menteri/eselon I/pejabat yang setara.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran I",
+"url": "/regulasi/kmk-296-2026.pdf#page=66"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Kendaraan Operasional dalam Lingkungan Kantor",
+"definisi": "Yang dimaksud kendaraan operasional dalam lingkungan kantor adalah kendaraan yang digunakan hanya dalam lingkungan kantor.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran II",
+"url": "/regulasi/kmk-296-2026.pdf#page=121"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Gedung Pertemuan",
+"definisi": "Gedung pertemuan adalah gedung yang biasa digunakan untuk pertemuan dengan kapasitas lebih dari 300 (tiga ratus) orang, sudah termasuk sewa meja, kursi, sound system, dan fasilitas gedung pertemuan lainnya.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran II",
+"url": "/regulasi/kmk-296-2026.pdf#page=123"
+},
+{
+"jenis": "SBM",
+"kelompok": "Barang dan Jasa",
+"istilah": "Petugas Menara Suar (PMS)",
+"definisi": "PMS adalah petugas yang menjaga dan merawat menara suar agar dapat berfungsi dengan baik.",
+"sumber": "KMK 296/2026 Penjelasan Lampiran II",
+"url": "/regulasi/kmk-296-2026.pdf#page=123"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Standar Struktur Biaya",
+"definisi": "Batasan besaran atau persentase komposisi biaya dalam 1 (satu) keluaran.",
+"sumber": "PMK 79/2025 Pasal 1 angka 1",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Keluaran",
+"definisi": "Barang atau jasa hasil akhir dari pelaksanaan kegiatan dalam mendukung pencapaian sasaran pembangunan nasional.",
+"sumber": "PMK 79/2025 Pasal 1 angka 2",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Rincian Output (RO)",
+"definisi": "Keluaran riil yang dihasilkan oleh unit kerja kementerian negara/lembaga yang berfokus pada isu tertentu serta berkaitan langsung dengan tugas dan fungsi unit kerja tersebut dalam mendukung pencapaian sasaran Kegiatan yang telah ditetapkan.",
+"sumber": "PMK 79/2025 Pasal 1 angka 3",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Klasifikasi Rincian Output (KRO)",
+"definisi": "Kumpulan atas RO yang disusun dengan mengelompokkan muatan rincian output yang sejenis atau serumpun berdasarkan sektor/bidang/jenis tertentu secara sistematis.",
+"sumber": "PMK 79/2025 Pasal 1 angka 4",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Grup Klasifikasi Rincian Output (Grup KRO)",
+"definisi": "Kumpulan KRO yang disusun dengan mengelompokkan atau mengklasifikasikan muatan KRO yang sejenis/serumpun berdasarkan sektor/ bidang/jenis tertentu.",
+"sumber": "PMK 79/2025 Pasal 1 angka 5",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Komponen Gaji dan Tunjangan (Komponen 001)",
+"definisi": "Anggaran yang dialokasikan untuk pembayaran gaji dan tunjangan yang melekat pada gaji, tunjangan kinerja, uang makan, uang lembur/uang makan lembur, uang lauk pauk prajurit TNI/anggota Polri, dan lain-lain belanja pegawai.",
+"sumber": "PMK 79/2025 Pasal 1 angka 6",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Komponen Operasional dan Pemeliharaan (Komponen 002)",
+"definisi": "Anggaran yang dialokasikan untuk operasional dan pemeliharaan dalam rangka beroperasionalnya suatu kantor.",
+"sumber": "PMK 79/2025 Pasal 1 angka 7",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Komponen Dukungan Operasional Pertahanan dan Keamanan (Komponen 003)",
+"definisi": "Anggaran yang dialokasikan untuk operasional dan pemeliharaan untuk gedung peralatan di bidang pertahanan dan keamanan yang hanya dimiliki oleh kementerian negara/lembaga yang mempunyai tugas dan fungsi di bidang pertahanan dan keamanan.",
+"sumber": "PMK 79/2025 Pasal 1 angka 8",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Komponen Dukungan Operasional Penyelenggaraan Pendidikan (Komponen 004)",
+"definisi": "Anggaran yang dialokasikan untuk mendukung operasional pendidikan yang hanya dimiliki oleh kementerian negara/lembaga yang mempunyai tugas dan fungsi di bidang pendidikan.",
+"sumber": "PMK 79/2025 Pasal 1 angka 9",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Ketentuan Umum",
+"istilah": "Komponen Dukungan Penyelenggaraan Tugas Dan Fungsi Unit (Komponen 005)",
+"definisi": "Anggaran yang dialokasikan dalam rangka pelaksanaan tugas dan fungsi yang tercantum pada peraturan struktur organisasi dan tata kerja sehingga harus dilaksanakan agar tidak timbul kekacauan dalam aspek sosial dan politik.",
+"sumber": "PMK 79/2025 Pasal 1 angka 10",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Klasifikasi Biaya",
+"istilah": "Biaya Utama",
+"definisi": "Komponen biaya yang berpengaruh secara langsung terhadap keluaran. Terdiri atas komponen 001, 002, 003, 004, 005, dan komponen lain sepanjang substansinya berpengaruh secara langsung terhadap Keluaran.",
+"sumber": "PMK 79/2025 Pasal 3 ayat (2) dan Pasal 5 ayat (4)",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Klasifikasi Biaya",
+"istilah": "Biaya Pendukung",
+"definisi": "Komponen biaya yang tidak berpengaruh secara langsung terhadap keluaran. Antara lain komponen yang memuat honorarium tim kegiatan, biaya konsumsi rapat dalam kantor, biaya kegiatan seremonial, biaya percetakan, pengadaan souvenir, dan/atau pengadaan ATK untuk kegiatan.",
+"sumber": "PMK 79/2025 Pasal 3 ayat (3) dan Pasal 5 ayat (5)",
+"url": "/regulasi/pmk-79-2025.pdf#page=2"
+},
+{
+"jenis": "SSB",
+"kelompok": "Batas Biaya Pendukung per Grup KRO",
+"istilah": "Grup KRO Kerangka regulasi",
+"definisi": "Besaran biaya pendukung paling tinggi 7% (tujuh persen) terhadap total biaya RO, bersifat batas tertinggi baik dalam perencanaan maupun pelaksanaan anggaran.",
+"sumber": "PMK 79/2025 Pasal 6 ayat (2) dan Pasal 7 ayat (1)",
+"url": "/regulasi/pmk-79-2025.pdf#page=3"
+},
+{
+"jenis": "SSB",
+"kelompok": "Batas Biaya Pendukung per Grup KRO",
+"istilah": "Grup KRO Kerangka pelayanan umum",
+"definisi": "Besaran biaya pendukung paling tinggi 9% (sembilan persen) terhadap total biaya RO, bersifat batas tertinggi baik dalam perencanaan maupun pelaksanaan anggaran.",
+"sumber": "PMK 79/2025 Pasal 6 ayat (2) dan Pasal 7 ayat (1)",
+"url": "/regulasi/pmk-79-2025.pdf#page=3"
+},
+{
+"jenis": "SSB",
+"kelompok": "Batas Biaya Pendukung per Grup KRO",
+"istilah": "Grup KRO Kerangka investasi fisik",
+"definisi": "Besaran biaya pendukung paling tinggi 6% (enam persen) terhadap total biaya RO, bersifat batas tertinggi baik dalam perencanaan maupun pelaksanaan anggaran.",
+"sumber": "PMK 79/2025 Pasal 6 ayat (2) dan Pasal 7 ayat (1)",
+"url": "/regulasi/pmk-79-2025.pdf#page=3"
+},
+{
+"jenis": "SSB",
+"kelompok": "Batas Biaya Pendukung per Grup KRO",
+"istilah": "Grup KRO Kerangka investasi sumber daya manusia dan sosial ekonomi",
+"definisi": "Besaran biaya pendukung paling tinggi 9% (sembilan persen) terhadap total biaya RO, bersifat batas tertinggi baik dalam perencanaan maupun pelaksanaan anggaran.",
+"sumber": "PMK 79/2025 Pasal 6 ayat (2) dan Pasal 7 ayat (1)",
+"url": "/regulasi/pmk-79-2025.pdf#page=3"
+},
+{
+"jenis": "SSB",
+"kelompok": "Batas Biaya Pendukung per Grup KRO",
+"istilah": "Grup KRO Administrasi pemerintahan internal kementerian negara/lembaga",
+"definisi": "Besaran biaya pendukung paling tinggi 9% (sembilan persen) terhadap total biaya RO, bersifat batas tertinggi baik dalam perencanaan maupun pelaksanaan anggaran.",
+"sumber": "PMK 79/2025 Pasal 6 ayat (2) dan Pasal 7 ayat (1)",
+"url": "/regulasi/pmk-79-2025.pdf#page=3"
+},
+{
+"jenis": "SSB",
+"kelompok": "Batas Biaya Pendukung per Grup KRO",
+"istilah": "Grup KRO Administrasi pemerintahan internal pemerintahan (antar kementerian negara/lembaga dan antar Pemerintah Pusat dengan Pemerintah Daerah)",
+"definisi": "Besaran biaya pendukung paling tinggi 9% (sembilan persen) terhadap total biaya RO, bersifat batas tertinggi baik dalam perencanaan maupun pelaksanaan anggaran.",
+"sumber": "PMK 79/2025 Pasal 6 ayat (2) dan Pasal 7 ayat (1)",
+"url": "/regulasi/pmk-79-2025.pdf#page=3"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "Standar Biaya Keluaran (SBK)",
+"definisi": "Standar Biaya Keluaran yang selanjutnya disingkat SBK adalah indeks biaya yang ditetapkan untuk menghasilkan 1 (satu) volume keluaran.",
+"sumber": "PMK 3/2026 Pasal 1",
+"url": "/regulasi/pmk-3-2026.pdf#page=2"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "SBK Umum",
+"definisi": "SBK yang berlaku untuk lebih dari 1 (satu) atau seluruh kementerian negara/lembaga. Tercantum dalam Lampiran I.",
+"sumber": "PMK 3/2026 Pasal 2 ayat (2) dan Pasal 3 ayat (1)",
+"url": "/regulasi/pmk-3-2026.pdf#page=2"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "SBK Khusus",
+"definisi": "SBK yang berlaku untuk 1 (satu) kementerian negara/lembaga. Tercantum dalam Lampiran II.",
+"sumber": "PMK 3/2026 Pasal 2 ayat (3) dan Pasal 3 ayat (2)",
+"url": "/regulasi/pmk-3-2026.pdf#page=2"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "Sifat Batas Tertinggi SBK",
+"definisi": "Penggunaan SBK umum dan SBK khusus bersifat batas tertinggi yang tidak dapat dilampaui.",
+"sumber": "PMK 3/2026 Pasal 4 ayat (2)",
+"url": "/regulasi/pmk-3-2026.pdf#page=3"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "Rincian Indeks SBK",
+"definisi": "Rincian indeks standar biaya keluaran terdiri atas rincian indeks SBK umum (Lampiran I) dan rincian indeks SBK khusus (Lampiran II), digunakan untuk penyusunan Rencana Kerja dan Anggaran kementerian negara/lembaga mulai tahun 2026.",
+"sumber": "KMK 57/2026 diktum KEDUA dan KETIGA",
+"url": "/regulasi/kmk-57-2026.pdf#page=2"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum SBK Umum",
+"istilah": "Klasifikasi Rincian Output (KRO)",
+"definisi": "Kumpulan atas rincian output yang disusun dengan mengelompokkan muatan rincian output yang sejenis atau serumpun berdasarkan sektor/bidang/jenis tertentu secara sistematis.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf A angka 1",
+"url": "/regulasi/pmk-3-2026.pdf#page=9"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum SBK Umum",
+"istilah": "Rincian Output (RO)",
+"definisi": "Keluaran riil yang dihasilkan oleh unit kerja Kementerian Negara/Lembaga (K/L) yang berfokus pada isu tertentu serta berkaitan langsung dengan tugas dan fungsi unit kerja tersebut dalam mendukung pencapaian sasaran kegiatan yang telah ditetapkan.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf A angka 2",
+"url": "/regulasi/pmk-3-2026.pdf#page=9"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum SBK Umum",
+"istilah": "Satuan Kerja Koordinator",
+"definisi": "Satuan kerja pada tingkat unit Eselon I atau yang setara, atau pada tingkat Kementerian Negara/Lembaga, yang memiliki tugas untuk mengoordinasikan penyusunan dan pemanfaatan keluaran bagi satker vertikal dalam Aplikasi SAKTI.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf A angka 4",
+"url": "/regulasi/pmk-3-2026.pdf#page=9"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum SBK Umum",
+"istilah": "Satuan Kerja Vertikal",
+"definisi": "Unit organisasi lini pada Kementerian Negara/Lembaga yang berada langsung di bawah unit eselon I, berkedudukan di luar kantor pusat, serta memiliki kewenangan serta tanggung jawab dalam penggunaan anggaran sesuai ketentuan peraturan perundang-undangan.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf A angka 5",
+"url": "/regulasi/pmk-3-2026.pdf#page=9"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Perencanaan dan Penganggaran",
+"definisi": "SBK layanan perencanaan dan penganggaran merupakan besaran biaya yang ditetapkan untuk layanan perencanaan dan penganggaran untuk internal Kementerian/Lembaga hanya pada Biro Perencanaan atau unit yang menangani perencanaan dan penganggaran di tingkat Kementerian/Lembaga, termasuk di dalamnya layanan penyusunan Rencana Strategis, Rencana Kerja serta Rencana Kerja dan Anggaran pada Kementerian/Lembaga tersebut.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 1",
+"url": "/regulasi/pmk-3-2026.pdf#page=10"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Pelatihan",
+"definisi": "SBK Layanan pelatihan merupakan besaran biaya yang ditetapkan untuk layanan pelatihan yang diperuntukan bagi SDM aparatur internal K/L.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 2",
+"url": "/regulasi/pmk-3-2026.pdf#page=10"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Audit Internal",
+"definisi": "SBK layanan audit internal merupakan penyusunan kebijakan dan SOP pengawasan internal, pelaksanaan audit, tindak lanjut audit, reviu, pembinaan pengawasan kinerja dan penyusunan laporan.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 3",
+"url": "/regulasi/pmk-3-2026.pdf#page=10"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Pemantauan dan Evaluasi",
+"definisi": "SBK Pemantauan dan Evaluasi merupakan besaran biaya yang digunakan untuk pemantauan, pengamatan, pencatatan, pemonitoran, penilaian serta pelaporan atas pelaksanaan fungsi dan tugas pemerintahan.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 4",
+"url": "/regulasi/pmk-3-2026.pdf#page=11"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Hubungan Masyarakat dan Informasi",
+"definisi": "SBK Layanan Hubungan Masyarakat dan Informasi merupakan besaran biaya yang digunakan untuk layanan yang berkaitan dengan: 1) Perumusan kebijakan di bidang hubungan masyarakat dan informasi; 2) Pengumpulan data dan informasi mengenai pendapat, sikap, dan kegiatan masyarakat terhadap pelaksanaan kebijakan pemerintah; 3) Publikasi dan dokumentasi kebijakan pemerintah; 4) Pelayanan informasi kebijakan dan kegiatan pemerintah.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 5",
+"url": "/regulasi/pmk-3-2026.pdf#page=11"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Bantuan Hukum",
+"definisi": "SBK Layanan Bantuan Hukum merupakan besaran biaya yang digunakan untuk layanan dalam menjalankan kuasa, mendampingi, mewakili, membela, dan/ atau melakukan tindakan hukum lain untuk kepentingan hukum yang diberikan kepada Internal K/L.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 6",
+"url": "/regulasi/pmk-3-2026.pdf#page=12"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Barang Milik Negara (BMN)",
+"definisi": "SBK layanan BMN merupakan besaran biaya yang ditetapkan untuk menghasilkan keluaran berupa layanan yang dilaksanakan dalam rangka penatausahaan, penilaian, pengalihan, monitoring dan penyusunan laporan BMN.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 7",
+"url": "/regulasi/pmk-3-2026.pdf#page=12"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Manajemen Kinerja",
+"definisi": "SBK Layanan Manajemen Kinerja merupakan besaran biaya yang digunakan untuk menghasilkan keluaran berupa Layanan manajemen kinerja organisasi serta penyusunan laporan kinerja yang bersifat reguler/rutin.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 8",
+"url": "/regulasi/pmk-3-2026.pdf#page=13"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Manajemen Keuangan",
+"definisi": "SBK Layanan Manajemen Keuangan merupakan besaran biaya yang digunakan untuk menghasilkan keluaran berupa Layanan Manajemen Keuangan adalah layanan yang merujuk pada pengelolaan atas fungsi- fungsi keuangan meliputi namun tidak terbatas pada kegiatan perencanaan, penganggaran, pemeriksaan, pengelolaan, pengendalian, pencarian dan penyimpanan dana yang dimiliki oleh organisasi.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 9",
+"url": "/regulasi/pmk-3-2026.pdf#page=13"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Manajemen Sumber Daya Manusia (SDM)",
+"definisi": "SBK Layanan Manajemen SDM merupakan besaran biaya yang ditetapkan untuk menghasilkan keluaran berupa layanan pengelolaan SDM, meliputi perencanaan kebutuhan SDM dan karir, pengembangan sistem manajemen SDM, perencanaan dan pelaksanaan pengembangan potensi, kompetensi, dan kapasitas pegawai, serta. administrasi kepegawaian.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 10",
+"url": "/regulasi/pmk-3-2026.pdf#page=13"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Hukum",
+"definisi": "SBK Layanan Hukum merupakan besaran biaya yang ditetapkan untuk menghasilkan layanan yang merujuk pada keluaran rangkaian kegiatan berupa koordinasi penelaahan dan penyusunan peraturan perundang- undangan hanya pada Biro Hukum atau unit setingkat yang mengoordinasikan dan melaksanakan dukungan perumusan peraturan perundang-undangan di tingkat Kementerian/Lembaga.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 11",
+"url": "/regulasi/pmk-3-2026.pdf#page=14"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Organisasi dan Tata Kelola Internal",
+"definisi": "SBK Layanan Organisasi dan Tata Kelola Internal merupakan besaran biaya yang ditetapkan untuk menghasilkan Layanan Organisasi dan Tata Kelola Internal merujuk pada layanan yang berkaitan manajemen organisasi, kelembagaan dan tata laksana tingkat Kementerian/Lembaga, hanya pada Biro Organisasi dan Tata Laksana atau unit setingkat yang mengoordinasikan dan melaksanakan pembinaan dan penataan organisasi, kelembagaan dan tata laksana tingkat Kementerian/Lembaga.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 12",
+"url": "/regulasi/pmk-3-2026.pdf#page=14"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Penyelenggaraan Kearsipan",
+"definisi": "SBK Layanan Penyelenggaraan Kearsipan merupakan besaran biaya yang ditetapkan untuk menghasilkan layanan yang berkaitan dengan kearsipan yaitu rekaman atau dokumentasi kegiatan atau peristiwa dalam berbagai bentuk dan media sesuai dengan perkembangan teknologi informasi dan komunikasi yang dibuat dan diterima oleh lembaga negara, pemerintahan daerah, lembaga pendidikan, perusahaan, organisasi politik, organisasi kemasyarakatan, dan perseorangan.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 13",
+"url": "/regulasi/pmk-3-2026.pdf#page=15"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Layanan Reformasi Kinerja",
+"definisi": "SBK Layanan Reformasi Kinerja merupakan besaran biaya yang ditetapkan untuk menghasilkan layanan pelaksanaan reformasi birokrasi, pemantauan dan evaluasi birokrasi dan penyusunan laporan.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 14",
+"url": "/regulasi/pmk-3-2026.pdf#page=15"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Rancangan Standar Nasional Indonesia 3 (RSNI3)",
+"definisi": "SBK RSNI3 merupakan besaran biaya yang digunakan untuk menghasilkan keluaran berupa Produk RSNI3 yang dihasilkan pada tahap penyusunan, pembahasan konsep sampai dengan tahap konsensus dari Komite Teknis Perumusan Standar Nasional Indonesia (SNI) tingkat kementerian negara/lembaga.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 15",
+"url": "/regulasi/pmk-3-2026.pdf#page=15"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Riset dan Inovasi",
+"definisi": "SBK Riset dan Inovasi merupakan besaran biaya yang digunakan untuk kegiatan riset dan inovasi.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 16",
+"url": "/regulasi/pmk-3-2026.pdf#page=16"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Naskah/Rekomendasi Kebijakan Aktual Strategis",
+"definisi": "SBK Naskah/Rekomendasi Kebijakan Aktual Strategis merupakan besaran biaya yang digunakan untuk menghasilkan keluaran berupa rekomendasi Kebijakan Bidang tertentu yang merujuk pada kebijakan, termasuk rekomendasi solusi atau alternatif solusi yang komprehensif dalam menghadapi isu terkait bidang tertentu.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 17",
+"url": "/regulasi/pmk-3-2026.pdf#page=17"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Peraturan Menteri/Pimpinan Lembaga",
+"definisi": "SBK peraturan menteri/pimpinan lembaga merupakan besaran biaya yang digunakan untuk menghasilkan keluaran berupa peraturan yang ditetapkan oleh menteri/kepala badan/kepala lembaga berdasarkan materi muatan dalam rangka penyelenggaraan urusan tertentu dalam pemerintahan.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 18",
+"url": "/regulasi/pmk-3-2026.pdf#page=18"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Peraturan Presiden",
+"definisi": "SBK Peraturan Presiden merupakan besaran biaya yang digunakan untuk menghasilkan keluaran berupa peraturan perundang-undangan yang ditetapkan oleh Presiden untuk menjalankan perintah Peraturan perundang-undangan yang lebih tinggi atau dalam menyelenggarakan kekuasaan pemerintahan,termasuk di dalamnya rancangan peraturan presiden. Dalam hal SBK Peraturan Presiden diselesaikan lebih dari satu tahun anggaran maka besaran SBK ini merupakan akumulasi dari waktu pelaksanaan penyelesaian Peraturan Presiden.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 19",
+"url": "/regulasi/pmk-3-2026.pdf#page=18"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Peraturan Pemerintah",
+"definisi": "SBK Peraturan Pemerintah merupakan besaran biaya yang digunakan untuk menghasilkan keluaran berupa Peraturan Perundangundangan yang ditetapkan oleh Presiden untuk menjalankan Undang-Undang sebagaimana mestinya, termasuk di dalamnya rancangan peraturan presiden,dan tidak termasuk di dalamnya naskah akademis dalam rangka penyusunan peraturan pemerintah. Dalam hal SBK Peraturan Pemerintah diselesaikan lebih dari satu tahun anggaran maka besaran SBK ini merupakan akumulasi dari waktu pelaksanaan penyelesaian Peraturan Pemerintah.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 20",
+"url": "/regulasi/pmk-3-2026.pdf#page=18"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Rancangan Undang-Undang",
+"definisi": "SBK Rancangan Undang-Undang merupakan besaran biaya yang ditetapkan untuk menghasilkan keluaran berupa Peraturan Perundang- undangan yang dibentuk oleh Dewan Perwakilan Rakyat dengan persetujuan bersama Presiden, termasuk di dalamnya Rancangan Undang-Undang, namun tidak termasuk Naskah Akademis dalam rangka penyusunan Undang-Undang. Dalam hal penyelesaian Rancangan Undang-Undang memerlukan waktu lebih dari satu tahun anggaran, besaran SBK sebagaimana dimaksud merupakan akumulasi dari keseluruhan waktu pelaksanaan penyelesaian Rancangan Undang- Undang tersebut.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 21",
+"url": "/regulasi/pmk-3-2026.pdf#page=19"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Peraturan Lainnya",
+"definisi": "SBK Peraturan Lainnya merupakan besaran biaya yang ditetapkan untuk menghasilkan keluaran berupa peraturan yang ditetapkan oleh Pejabat Tinggi Madya Kementerian Negara/Lembaga sesuai dengan tugas, fungsi, dan kewenangannya, serta keputusan yang ditetapkan oleh Pejabat Pemerintahan sesuai dengan tugas, fungsi, dan kewenangannya, serta bersifat mengatur dan mengikat ke luar kementerian negara/lembaga yang bersangkutan. Peraturan sejenis yang hanya mengikat ke dalam kementerian negara/lembaga tidak memerlukan alokasi anggaran tersendiri, dan apabila diperlukan biaya, dibebankan pada alokasi belanja operasional yang tersedia",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 22",
+"url": "/regulasi/pmk-3-2026.pdf#page=19"
+},
+{
+"jenis": "SBK",
+"kelompok": "SBK Umum",
+"istilah": "SBK Sosialisasi dan Diseminasi",
+"definisi": "SBK Sosialisasi dan Diseminasi adalah besaran biaya yang digunakan untuk menghasilkan keluaran berupa jumlah orang yang mengikuti sosialisasi dan/atau diseminasi informasi secara luring (offline) kepada pihak-pihak terkait, dengan tujuan penyebarluasan informasi terkait suatu kebijakan atau arahan tertentu kepada masyarakat, lembaga maupun badan usaha dengan tujuan meningkatkan kesadaran bagi masyarakat untuk menerima, dan mengaplikasikan informasi tersebut, dengan penerima manfaat output adalah eksternal K/L atau publik.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf B angka 23",
+"url": "/regulasi/pmk-3-2026.pdf#page=20"
+}
+]
+}
