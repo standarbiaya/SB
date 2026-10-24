@@ -747,6 +747,78 @@
 },
 {
 "jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "Standar Biaya Keluaran (SBK)",
+"definisi": "Standar Biaya Keluaran yang selanjutnya disingkat SBK adalah indeks biaya yang ditetapkan untuk menghasilkan 1 (satu) volume keluaran.",
+"sumber": "PMK 3/2026 Pasal 1",
+"url": "/regulasi/pmk-3-2026.pdf#page=2"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "SBK Umum",
+"definisi": "SBK yang berlaku untuk lebih dari 1 (satu) atau seluruh kementerian negara/lembaga. Tercantum dalam Lampiran I.",
+"sumber": "PMK 3/2026 Pasal 2 ayat (2) dan Pasal 3 ayat (1)",
+"url": "/regulasi/pmk-3-2026.pdf#page=2"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "SBK Khusus",
+"definisi": "SBK yang berlaku untuk 1 (satu) kementerian negara/lembaga. Tercantum dalam Lampiran II.",
+"sumber": "PMK 3/2026 Pasal 2 ayat (3) dan Pasal 3 ayat (2)",
+"url": "/regulasi/pmk-3-2026.pdf#page=2"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "Sifat Batas Tertinggi SBK",
+"definisi": "Penggunaan SBK umum dan SBK khusus bersifat batas tertinggi yang tidak dapat dilampaui.",
+"sumber": "PMK 3/2026 Pasal 4 ayat (2)",
+"url": "/regulasi/pmk-3-2026.pdf#page=3"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum",
+"istilah": "Rincian Indeks SBK",
+"definisi": "Rincian indeks standar biaya keluaran terdiri atas rincian indeks SBK umum (Lampiran I) dan rincian indeks SBK khusus (Lampiran II), digunakan untuk penyusunan Rencana Kerja dan Anggaran kementerian negara/lembaga mulai tahun 2026.",
+"sumber": "KMK 57/2026 diktum KEDUA dan KETIGA",
+"url": "/regulasi/kmk-57-2026.pdf#page=2"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum SBK Umum",
+"istilah": "Klasifikasi Rincian Output (KRO)",
+"definisi": "Kumpulan atas rincian output yang disusun dengan mengelompokkan muatan rincian output yang sejenis atau serumpun berdasarkan sektor/bidang/jenis tertentu secara sistematis.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf A angka 1",
+"url": "/regulasi/pmk-3-2026.pdf#page=9"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum SBK Umum",
+"istilah": "Rincian Output (RO)",
+"definisi": "Keluaran riil yang dihasilkan oleh unit kerja Kementerian Negara/Lembaga (K/L) yang berfokus pada isu tertentu serta berkaitan langsung dengan tugas dan fungsi unit kerja tersebut dalam mendukung pencapaian sasaran kegiatan yang telah ditetapkan.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf A angka 2",
+"url": "/regulasi/pmk-3-2026.pdf#page=9"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum SBK Umum",
+"istilah": "Satuan Kerja Koordinator",
+"definisi": "Satuan kerja pada tingkat unit Eselon I atau yang setara, atau pada tingkat Kementerian Negara/Lembaga, yang memiliki tugas untuk mengoordinasikan penyusunan dan pemanfaatan keluaran bagi satker vertikal dalam Aplikasi SAKTI.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf A angka 4",
+"url": "/regulasi/pmk-3-2026.pdf#page=9"
+},
+{
+"jenis": "SBK",
+"kelompok": "Ketentuan Umum SBK Umum",
+"istilah": "Satuan Kerja Vertikal",
+"definisi": "Unit organisasi lini pada Kementerian Negara/Lembaga yang berada langsung di bawah unit eselon I, berkedudukan di luar kantor pusat, serta memiliki kewenangan serta tanggung jawab dalam penggunaan anggaran sesuai ketentuan peraturan perundang-undangan.",
+"sumber": "PMK 3/2026 Penjelasan SBK Umum huruf A angka 5",
+"url": "/regulasi/pmk-3-2026.pdf#page=9"
+},
+{
+"jenis": "SBK",
 "kelompok": "SBK Umum",
 "istilah": "SBK Layanan Perencanaan dan Penganggaran",
 "definisi": "SBK layanan perencanaan dan penganggaran merupakan besaran biaya yang ditetapkan untuk layanan perencanaan dan penganggaran untuk internal Kementerian/Lembaga hanya pada Biro Perencanaan atau unit yang menangani perencanaan dan penganggaran di tingkat Kementerian/Lembaga, termasuk di dalamnya layanan penyusunan Rencana Strategis, Rencana Kerja serta Rencana Kerja dan Anggaran pada Kementerian/Lembaga tersebut.",
